@@ -2,9 +2,7 @@
 """
 Created on Wed Nov  3 12:03:15 2021
 
-@author: Johannes Müller, Marcelo Zoccoler, Robert Haase
-
-DFG funded cluster of excellence "Physics of Life", TU Dresden, Dresden, Germany
+@author: Johannes Müller DFG Cluster of Excellence "Physics of Life", TU Dresden
 """
 
 from ._intersection_over_union import intersection_over_union

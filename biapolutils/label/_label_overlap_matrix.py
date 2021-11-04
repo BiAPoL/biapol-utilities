@@ -2,7 +2,7 @@
 """
 Created on Wed Nov  3 11:55:46 2021
 
-@author: johan
+@author: Johannes Müller, DFG Cluster of Excellence "Physics of Life", TU Dresden
 """
 
 import numpy as np

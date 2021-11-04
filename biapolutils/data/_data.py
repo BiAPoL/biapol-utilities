@@ -2,7 +2,7 @@
 """
 Created on Thu Nov  4 09:03:52 2021
 
-@author: Johannes Müller, DFG cluster of excellence "Physics of Life" @ TU Dresden, Dresden, Germany
+@author: Johannes Müller, DFG Cluster of Excellence "Physics of Life", TU Dresden
 """
 
 from skimage import io
