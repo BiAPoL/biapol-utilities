@@ -15,6 +15,7 @@ util
 from .label import *
 from .surface import *
 from .util import *
+from .data import *
 
 
 __version__ = "0.0.1"
