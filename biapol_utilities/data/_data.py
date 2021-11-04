@@ -13,17 +13,16 @@ data_dir = os.path.abspath(os.path.dirname(__file__))
 
 def blobs():
     
-    """Gray-level "blobs" image.
+    """Gray-level "blobs" image [1].
     
     Can be used for segmentation and denoising examples.
     
     Returns
     -------
-    camera : (256, 254) uint8 ndarray
+    blobs : (256, 254) uint8 ndarray
         Blobs image.
     
-    Notes
-    -----
+
 
     References
     ----------
