@@ -8,12 +8,9 @@ DFG funded cluster of excellence "Physics of Life", TU Dresden, Dresden, Germany
 """
 
 import numpy as np
-import tqdm
 from ._intersection_over_union import intersection_over_union
-from skimage import io
-import os
 
-def match_labels_stack(stack, method='iou', **kwargs):
+def match_labels_stack(label_stack, method='iou', **kwargs):
     """
     Match labels from subsequent slices with specified method
 
@@ -37,15 +34,17 @@ def match_labels_stack(stack, method='iou', **kwargs):
     if method == 'iou':
         
         # iterate over masks
-        for i in tqdm.tqdm(range(len(stack)-1), desc='Stitching slices'):
-            stack[i+1] = match_labels(stack[i], stack[i+1], method=method, **kwargs)
+        for i in range(len(label_stack)-1):
+            label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
+                                            method=method, **kwargs)
             
-    return stack
+    return label_stack
 
-def match_labels(imageA, imageB, method='iou', **kwargs):
+def match_labels(label_image_x, label_image_y, method='iou', **kwargs):
     """
     
-    Match labels in two labelled images with each other
+    Match labels in label_image_y with labels in label_image_x based on similarity
+    as defined by the passed method.
     
     Parameters
     ----------
@@ -74,8 +73,8 @@ def match_labels(imageA, imageB, method='iou', **kwargs):
     if method == 'iou':
         iou_threshold = kwargs.get('iou_threshold', 0.25)
     
-        iou = intersection_over_union(imageB, imageA)[1:,1:]
-        mmax = imageA.max()
+        iou = intersection_over_union(label_image_y, label_image_x)[1:,1:]
+        mmax = label_image_x.max()
         
         if iou.size > 0:
             
@@ -92,7 +91,7 @@ def match_labels(imageA, imageB, method='iou', **kwargs):
             mmax += len(ino)
             istitch = np.append(np.array(0), istitch)
             
-            return istitch[imageB]
+            return istitch[label_image_y]
     
 
 
