@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Nov  3 11:58:34 2021
-
-@author: Johannes Müller Bio-image Analysis Technology Development Group at
-DFG Cluster of Excellence "Physics of Life", TU Dresden
-"""
 
 import numpy as np
 from ._intersection_over_union import intersection_over_union

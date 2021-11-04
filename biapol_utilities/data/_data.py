@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Nov  4 09:03:52 2021
-
-@author: Johannes Müller, Bio-image Analysis Technology Development Group at 
-DFG Cluster of Excellence "Physics of Life", TU Dresden
-"""
 
 from skimage import io
 import os

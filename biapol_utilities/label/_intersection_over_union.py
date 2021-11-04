@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Nov  3 11:56:29 2021
-
-@author: Johannes Müller, Bio-image Analysis Technology Development Group at 
-DFG Cluster of Excellence "Physics of Life", TU Dresden
-"""
 
 import numpy as np
 from ._label_overlap_matrix import label_overlap_matrix
