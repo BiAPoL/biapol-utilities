@@ -15,8 +15,6 @@ def blobs():
     -------
     blobs : (256, 254) uint8 ndarray
         Blobs image.
-    
-
 
     References
     ----------
