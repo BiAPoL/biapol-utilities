@@ -2,7 +2,8 @@
 """
 Created on Wed Nov  3 11:56:29 2021
 
-@author: Johannes Müller, DFG Cluster of Excellence "Physics of Life", TU Dresden
+@author: Johannes Müller, Bio-image Analysis Technology Development Group at 
+DFG Cluster of Excellence "Physics of Life", TU Dresden
 """
 
 import numpy as np
