@@ -9,7 +9,7 @@ label
     Label handling and evaluation
 surface
     Manage surfaces and point representations
-util
+utilities
     Generic utilities.
 """
 
@@ -17,7 +17,7 @@ __version__ = "0.0.1"
 
 from .label import *
 from .surface import *
-from .util import *
+from .utilities import *
 from .data import *
 
 
