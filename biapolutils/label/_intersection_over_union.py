@@ -8,6 +8,7 @@ Created on Wed Nov  3 11:56:29 2021
 import numpy as np
 from ._label_overlap_matrix import label_overlap_matrix
 
+
 def intersection_over_union(masks_true, masks_pred):
     """ intersection over union of all mask pairs
     
