@@ -9,7 +9,7 @@ DFG Cluster of Excellence "Physics of Life", TU Dresden
 import numpy as np
 from ._intersection_over_union import intersection_over_union
 
-def match_labels_stack(label_stack, method='iou', **kwargs):
+def match_labels_stack(label_stack, method=intersection_over_union, **kwargs):
     """
     Match labels from subsequent slices with specified method
 
@@ -30,7 +30,7 @@ def match_labels_stack(label_stack, method='iou', **kwargs):
 
     """
 
-    if method == 'iou':
+    if method == intersection_over_union:
         
         # iterate over masks
         for i in range(len(label_stack)-1):
@@ -39,7 +39,7 @@ def match_labels_stack(label_stack, method='iou', **kwargs):
             
     return label_stack
 
-def match_labels(label_image_x, label_image_y, method='iou', **kwargs):
+def match_labels(label_image_x, label_image_y, method=intersection_over_union, **kwargs):
     """
     
     Match labels in label_image_y with labels in label_image_x based on similarity
@@ -69,30 +69,27 @@ def match_labels(label_image_x, label_image_y, method='iou', **kwargs):
 
     """
     
-    if method == 'iou':
-        iou_threshold = kwargs.get('iou_threshold', 0.25)
+    if method == intersection_over_union:
+        threshold = kwargs.get('iou_threshold', 0.25)
     
-        iou = intersection_over_union(label_image_y, label_image_x)[1:,1:]
-        mmax = label_image_x.max()
+    
+    # Calculate image similarity matrix img_sim based on chosen method
+    img_sim = method(label_image_y, label_image_x)[1:,1:]
+    mmax = label_image_x.max()
+    
+    if img_sim.size > 0:
         
-        if iou.size > 0:
-            
-            # Keep only ious above threshold
-            iou[iou < iou_threshold] = 0.0
-            iou[iou < iou.max(axis=0)] = 0.0
-            
-            # Pick value with highest IoU value
-            istitch = iou.argmax(axis=1) + 1
-            ino = np.nonzero(iou.max(axis=1)==0.0)[0]  # Find unpaired labels
-            
-            # append unmatched labels and background to lookup table
-            istitch[ino] = np.arange(mmax+1, mmax+len(ino)+1, 1, int)  
-            mmax += len(ino)
-            istitch = np.append(np.array(0), istitch)
-            
-            return istitch[label_image_y]
-    
-
-
-
-    
+        # Keep only ious above threshold
+        img_sim[img_sim < threshold] = 0.0
+        img_sim[img_sim < img_sim.max(axis=0)] = 0.0
+        
+        # Pick value with highest IoU value
+        istitch = img_sim.argmax(axis=1) + 1
+        ino = np.nonzero(img_sim.max(axis=1)==0.0)[0]  # Find unpaired labels
+        
+        # append unmatched labels and background to lookup table
+        istitch[ino] = np.arange(mmax+1, mmax+len(ino)+1, 1, int)  
+        mmax += len(ino)
+        istitch = np.append(np.array(0), istitch)
+        
+        return istitch[label_image_y]    
