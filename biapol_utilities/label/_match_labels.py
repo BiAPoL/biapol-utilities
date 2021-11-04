@@ -4,8 +4,7 @@ import numpy as np
 from ._intersection_over_union import intersection_over_union
 
 def match_labels_stack(label_stack, method=intersection_over_union, **kwargs):
-    """
-    Match labels from subsequent slices with specified method
+    """Match labels from subsequent slices with specified method
 
     Parameters
     ----------
@@ -21,7 +20,6 @@ def match_labels_stack(label_stack, method=intersection_over_union, **kwargs):
     -------
     masks : 3D-array, int
         Stack of stitched masks
-
     """
 
     if method == intersection_over_union:
@@ -34,9 +32,7 @@ def match_labels_stack(label_stack, method=intersection_over_union, **kwargs):
     return label_stack
 
 def match_labels(label_image_x, label_image_y, method=intersection_over_union, **kwargs):
-    """
-    
-    Match labels in label_image_y with labels in label_image_x based on similarity
+    """Match labels in label_image_y with labels in label_image_x based on similarity
     as defined by the passed method.
     
     Parameters
@@ -60,7 +56,6 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union, *
     -------
     nd-array
         Processed version of imageB with labels corresponding to imageA.
-
     """
     
     if method == intersection_over_union:
@@ -86,4 +81,4 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union, *
         mmax += len(ino)
         istitch = np.append(np.array(0), istitch)
         
-        return istitch[label_image_y]    
+        return istitch[label_image_y]
