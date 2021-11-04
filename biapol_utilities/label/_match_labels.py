@@ -11,7 +11,10 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwa
     label_stack : 3D-array, int
         Stack of 2D label images to be stitched with axis order ZYX
     method : str, optional
-        Method to be used for stitching the masks. The default is intersection_over_union_matrix.
+        Method to be used for stitching the masks. The default is intersection_over_union_matrix with a stitch threshold of 0.25.
+        *stitch_threshold* : float
+            Threshold value for iou value above which two labels are considered identical.
+            The default value is 0.25
 
     Returns
     -------
@@ -19,10 +22,12 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwa
         Stack of stitched masks
     """
 
-    # iterate over masks
-    for i in range(len(label_stack)-1):
-        label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
-                                        method=method, **kwargs)
+    if method == intersection_over_union_matrix:
+        
+        # iterate over masks
+        for i in range(len(label_stack)-1):
+            label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
+                                            method=method, **kwargs)
             
     return label_stack
 
