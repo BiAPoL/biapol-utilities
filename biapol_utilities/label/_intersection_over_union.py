@@ -4,8 +4,8 @@ import numpy as np
 from ._label_overlap_matrix import label_overlap_matrix
 
 
-def intersection_over_union(masks_true, masks_pred):
-    """Intersection over union of all mask pairs
+def intersection_over_union_matrix(label_image_x, label_image_y):
+    """Generates a matrix with intersection over union of all mask pairs
 
     How it works:
     The overlap matrix is a lookup table of the area of intersection
@@ -26,19 +26,23 @@ def intersection_over_union(masks_true, masks_pred):
     
     Parameters
     ----------
-    masks_true: ND-array, int 
-        ground truth masks, where 0=NO masks; 1,2... are mask labels
-    masks_pred: ND-array, int
-        predicted masks, where 0=NO masks; 1,2... are mask labels
+    label_image_x: ND-array, int
+        label image, where 0=background; 1,2... are label masks
+    label_image_y: ND-array, int
+        label image, where 0=background; 1,2... are label masks
 
     Returns
     -------
     iou: ND-array, float
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
+
+    See Also
+    --------
+    ..[0] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
     """
     
     # Calculate overlap matrix
-    overlap = label_overlap_matrix(masks_true, masks_pred)
+    overlap = label_overlap_matrix(label_image_x, label_image_y)
     
     # Measure correctly labeled pixels
     n_pixels_pred = np.sum(overlap, axis=0, keepdims=True)

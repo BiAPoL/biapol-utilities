@@ -11,7 +11,7 @@ def test_iou():
     b = np.arange(1, size, 1, dtype=np.uint8)
     np.random.shuffle(b)
     
-    iou = bputils.label.intersection_over_union(a, b)
+    iou = bputils.label.intersection_over_union_matrix(a, b)
     
     assert(iou.shape == (size, size))
     
