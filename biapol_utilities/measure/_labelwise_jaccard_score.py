@@ -22,7 +22,6 @@ def labelwise_jaccard_score(label_image_true, label_image_pred):
         in set of labels
 
     """
-    np.issubdtype(np.uint32, np.integer)
 
     
     if not np.issubdtype(label_image_pred.dtype, np.integer):
