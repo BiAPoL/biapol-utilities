@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-import biabiapol_utilities as bputils
+import biapol_utilities as bputils
 
 def test_match_labels():
     

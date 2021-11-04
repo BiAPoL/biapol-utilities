@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-import biabiapol_utilities as bputils
+import biapol_utilities as bputils
 import numpy as np
 
 def test_iou():
