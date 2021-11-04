@@ -10,13 +10,15 @@ def match_labels_stack(label_stack, method=thresholded_intersection_over_union_m
     ----------
     label_stack : 3D-array, int
         Stack of 2D label images to be stitched with axis order ZYX
-    method : str, optional
-        Method to be used for stitching the masks. The default is thresholded_intersection_over_union_matrix.
+    method : callable, optional
+        Method to be used for matching the labels. This function is supposed to return a binary matrix with
+        `shape=(n+1, m+1)` corresponding to `match=1`, `no_match=0` of the `n` labels in a given slice and `m` labels
+        in the following slice. The default is thresholded_intersection_over_union_matrix.
 
     Returns
     -------
     3D-array, int
-        Stack of stitched masks
+        Stack of stitched labels
     """
 
 
@@ -38,7 +40,10 @@ def match_labels(label_image_x, label_image_y, method=thresholded_intersection_o
     label_image_y : nd-array
         Image the labels of which should be paired with labels from imageA
     method : callable, optional
-        Pairing method to be used.
+        Method to be used for matching the labels. This function is supposed to return a binary matrix with
+        `shape=(n+1, m+1)` corresponding to `match=1`, `no_match=0` of the `n` labels in `label_image_x` and `m` labels in
+        `label_image_y`. The default is thresholded_intersection_over_union_matrix.
+
 
     Returns
     -------
@@ -46,7 +51,8 @@ def match_labels(label_image_x, label_image_y, method=thresholded_intersection_o
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
-    # Calculate image similarity matrix img_sim based on chosen method
+    # Calculate image similarity matrix img_sim based on chosen method and
+    # ignore the first row/columnm, because it corresponds to background
     img_sim = method(label_image_y, label_image_x, **kwargs)[1:,1:]
     mmax = label_image_x.max()
     
