@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import bibiapol_utilities as bputils
+import biapol_utilities as bputils
 import numpy as np
 
 
