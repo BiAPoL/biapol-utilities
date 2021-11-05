@@ -6,16 +6,16 @@ from biapol_utilities import measure
 import pandas as pd
 
 
-def compare_labels(label_image_true, label_image_pred):
+def compare_labels(label_image_x, label_image_y):
     """
     Compares two label images regarding metrics from sklearn
 
     Parameters
     ----------
-    label_image_true : ndarray, int
+    label_image_x : ND-array, int
         Ground truth label image of arbitrary dimensions.
-    label_image_y : ndarray, int
-        Predicted label image which will be compared to ground truth label image.
+    label_image_y : ND-array, int
+        Predicted label image which will be compared to label_image_x.
 
     Returns
     -------
@@ -24,19 +24,19 @@ def compare_labels(label_image_true, label_image_pred):
     """
     
     # Flatten input
-    label_image_true = label_image_true.flatten()
-    label_image_pred = label_image_pred.flatten()
+    label_image_x = label_image_x.flatten()
+    label_image_y = label_image_y.flatten()
     
-    if not label_image_true.shape == label_image_pred.shape:
-        raise Exception(f'Input images must have same dimension but have {label_image_true.shape} and {label_image_pred.shape}')
+    if not label_image_x.shape == label_image_y.shape:
+        raise Exception(f'Input images must have same dimension but have {label_image_x.shape} and {label_image_y.shape}')
     
     # get list of present labels in bothn images and allocate results
-    labels = np.unique(np.hstack([label_image_true, label_image_pred]))
+    labels = np.unique(np.hstack([label_image_x, label_image_y]))
     df = pd.DataFrame(columns = ['label', 'jaccard_score'])
     
     # calculate Jaccard score
-    jc_score = measure.labelwise_jaccard_score(label_image_true,
-                                               label_image_pred)
+    jc_score = measure.labelwise_jaccard_score(label_image_x,
+                                               label_image_y)
     
     df['label'] = labels
     df['jaccard_score'] = jc_score
