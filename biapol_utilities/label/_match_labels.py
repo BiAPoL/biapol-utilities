@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from skimage.segmentation import relabel_sequential
 from ._intersection_over_union import intersection_over_union
 
 def match_labels_stack(label_stack, method=intersection_over_union, **kwargs):
@@ -61,6 +62,10 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union, *
     if method == intersection_over_union:
         threshold = kwargs.get('iou_threshold', 0.25)
     
+    # relabel label_image_y to keep overlap matrix small
+    label_image_y, _, _ = relabel_sequential(label_image_y)
+    # label_image_x, fw, inv = relabel_sequential(label_image_x)
+    
     
     # Calculate image similarity matrix img_sim based on chosen method
     img_sim = method(label_image_y, label_image_x)[1:,1:]
@@ -74,7 +79,7 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union, *
         
         # Pick value with highest IoU value
         istitch = img_sim.argmax(axis=1) + 1
-        ino = np.nonzero(img_sim.max(axis=1)==0.0)[0]  # Find unpaired labels
+        ino = np.nonzero(img_sim.max(axis=1) == 0.0)[0]  # Find unpaired labels
         
         # append unmatched labels and background to lookup table
         istitch[ino] = np.arange(mmax+1, mmax+len(ino)+1, 1, int)  
