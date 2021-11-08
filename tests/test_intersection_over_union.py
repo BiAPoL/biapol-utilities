@@ -27,4 +27,3 @@ def test_intersection_over_union_matrix():
     iou = biau.intersection_over_union(a, b)
 
     assert np.allclose(iou, reference, 0.02)
-    
