@@ -13,7 +13,7 @@ def test_iou():
     
     iou = biau.label.intersection_over_union(a, b)
     
-    assert(iou.shape == (size, size))
+    assert(iou.shape == (len(a), len(b)))
 
 def test_intersection_over_union_matrix():
     a = np.asarray([1, 1, 2, 2, 0, 0])
@@ -28,3 +28,5 @@ def test_intersection_over_union_matrix():
     assert np.allclose(iou, reference, 0.02)
     
 
+if __name__ == "__main__":
+    test_iou()
