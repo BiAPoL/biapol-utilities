@@ -3,30 +3,6 @@
 import numpy as np
 from ._label_overlap_matrix import label_overlap_matrix
 
-def thresholded_intersection_over_union_matrix(label_image_x, label_image_y, minimum_overlap=0.25):
-    """Computes the intersection-over-union matrix of all labels in the two label images pair-wise.
-    Afterwards, a binary matrix is computed with value=1 if the computed overlap is above a given threshold,
-    0 otherwise.
-
-    Parameters
-    ----------
-    label_image_x: ND-array, int
-        a label image
-    label_image_y: ND-array, int
-        another label image
-    minimum_overlap: float
-        threshold representing the minimum amount of overlap labels have to have so that they are considered
-        overlapping and get a 1 in the thresholded matrix.
-
-    Returns
-    -------
-    ND-array, int
-        a binary matrix
-    """
-    matrix = intersection_over_union_matrix(label_image_x, label_image_y)
-
-    # apply threshold
-    return matrix >= minimum_overlap
 
 def intersection_over_union_matrix(label_image_x, label_image_y):
     """Generates a matrix with intersection over union of all mask pairs
