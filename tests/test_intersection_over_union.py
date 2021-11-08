@@ -21,12 +21,10 @@ def test_intersection_over_union_matrix():
 
     reference = np.asarray([[0.33, 0.5,  0.,   0.  ],
                             [0.,   0.,   0.33, 0.5 ],
-                            [0.33, 0.,   0.33, 0.  ]])
+                            [0.33, 0.,   0.33, 0.  ],
+                            [0.,   0.,   0.,   0.  ]])
 
     iou = biau.intersection_over_union(a, b)
 
     assert np.allclose(iou, reference, 0.02)
     
-
-if __name__ == "__main__":
-    test_iou()
