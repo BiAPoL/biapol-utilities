@@ -79,9 +79,9 @@ def test_confusion_matrix2():
     
     overlap = bputils.label.label_overlap_matrix(a, b)
     
-    correct_result = np.asarray([[2, 0, 0],
-                                 [0, 3, 1],
-                                 [0, 0, 2],
-                                 [0, 0, 1]])
+    correct_result = np.asarray([[2, 0, 0, 0],
+                                 [0, 3, 1, 0],
+                                 [0, 0, 2, 0],
+                                 [0, 0, 1, 0]])
     
     assert(np.array_equal(overlap, correct_result))
