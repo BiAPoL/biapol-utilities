@@ -60,8 +60,4 @@ def label_overlap_matrix(label_image_x, label_image_y):
     # Calculate confusion matrix
     overlap = metrics.confusion_matrix(label_image_x, label_image_y)
     
-    # Remove empty rows/columns
-    overlap = overlap[~np.all(overlap == 0, axis=1)]
-    overlap = overlap[:, ~np.all(overlap == 0, axis=0)]
-    
     return overlap
