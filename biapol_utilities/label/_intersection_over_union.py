@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from ._label_overlap_matrix import label_overlap_matrix
+from ._label_overlap_matrix import label_overlap_matrix, label_overlap_matrix_numpy
 
 
 def intersection_over_union(masks_true, masks_pred):
