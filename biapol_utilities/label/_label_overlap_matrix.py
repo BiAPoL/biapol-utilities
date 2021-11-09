@@ -11,9 +11,9 @@ def label_overlap_matrix(label_image_x, label_image_y):
     
     Parameters
     ----------
-    x: ND-array, int
+    label_image_x: ND-array, int
         where 0=NO masks; 1,2... are mask labels
-    y: ND-array, int
+    label_image_y: ND-array, int
         where 0=NO masks; 1,2... are mask labels
 
     Returns
