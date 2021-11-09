@@ -25,3 +25,7 @@ def test_match_labels_2():
     labels_y_matched = biau.label.match_labels(labels_x, labels_y)
 
     assert np.array_equal(labels_y_matched, reference_y_matched)
+    
+if __name__ == "__main__":
+    test_match_labels()
+    test_match_labels_2()
