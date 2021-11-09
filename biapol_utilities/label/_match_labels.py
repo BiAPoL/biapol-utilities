@@ -64,7 +64,6 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
     
     # relabel label_image_y to keep overlap matrix small
     label_image_y, _, _ = relabel_sequential(label_image_y)
-    # label_image_x, fw, inv = relabel_sequential(label_image_x)
     
     
     # Calculate image similarity matrix img_sim based on chosen method
