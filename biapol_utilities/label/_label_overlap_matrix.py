@@ -19,7 +19,9 @@ def label_overlap_matrix(label_image_x, label_image_y):
     Returns
     -------
     overlap: ND-array, int
-        matrix of pixel overlaps of size [x.max()+1, y.max()+1]
+        matrix of pixel overlaps of size [max(x, y) + 1, max(x, y) + 1], with 
+        entry result[i, j] corresponding to the overlap of label i in image x 
+        with label j in image y
     """
     
     
