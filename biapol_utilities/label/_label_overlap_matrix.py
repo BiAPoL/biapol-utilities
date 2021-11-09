@@ -25,7 +25,7 @@ def label_overlap_matrix(label_image_x, label_image_y):
     """
     
     
-    # Flatten input arrays
+    # Make input arrays 1D
     label_image_x = label_image_x.ravel()
     label_image_y = label_image_y.ravel()
     
