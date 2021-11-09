@@ -5,13 +5,13 @@ import numpy as np
 def label_overlap_matrix(label_image_x, label_image_y):
     """ Get pixel overlaps between masks in x and y
     
-    From: https://github.com/MouseLand/cellpose/blob/6fddd4da98219195a2d71041fb0e47cc69a4b3a6/cellpose/metrics.py#L130
+    Adapted from: https://github.com/MouseLand/cellpose/blob/6fddd4da98219195a2d71041fb0e47cc69a4b3a6/cellpose/metrics.py#L130
     
     Parameters
     ----------
-    x: ND-array, int
+    label_image_x: ND-array, int
         where 0=NO masks; 1,2... are mask labels
-    y: ND-array, int
+    label_image_y: ND-array, int
         where 0=NO masks; 1,2... are mask labels
 
     Returns
