@@ -28,3 +28,4 @@ def test_match_labels_2():
 
 if __name__ == "__main__":
     test_match_labels_2()
+    test_match_labels()
