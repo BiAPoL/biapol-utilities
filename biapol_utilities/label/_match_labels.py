@@ -3,6 +3,7 @@
 import numpy as np
 from ._intersection_over_union import thresholded_intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
+from ._filter_similarity_matrix import suppression_threshold, label_wise_maximum
 
 def match_labels_stack(label_stack, method=thresholded_intersection_over_union_matrix, **kwargs):
     """Match labels from subsequent slices with specified method
@@ -52,10 +53,12 @@ def match_labels(label_image_x, label_image_y, method=thresholded_intersection_o
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
+    method_filter = kwargs.get('filter', suppression_threshold)
     method_matching = kwargs.get('matching', max_similarity)
     
     # Calculate image similarity matrix img_sim based on chosen method and
     # ignore the first row/columnm, because it corresponds to background
     similarity_matrix = method(label_image_y, label_image_x, **kwargs)[1:,1:]
+    similarity_matrix = method_filter(suppression_threshold)
     
     return method_matching(label_image_x, label_image_y, similarity_matrix)
