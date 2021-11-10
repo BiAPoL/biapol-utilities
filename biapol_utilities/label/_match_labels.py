@@ -4,7 +4,9 @@ import numpy as np
 from ._intersection_over_union import intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_maximal
+
 from sklearn.metrics import confusion_matrix
+from skimage.segmentation import relabel_sequential
 
 def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwargs):
     """Match labels from subsequent slices with specified method
@@ -53,6 +55,9 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
     nd-array
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
+    
+    # relabel label_image_y to keep overlap matrix small
+    label_image_y, _, _ = relabel_sequential(label_image_y)
     
     method_filter = kwargs.get('filter', suppressed_maximal)
     method_matching = kwargs.get('matching', max_similarity)
