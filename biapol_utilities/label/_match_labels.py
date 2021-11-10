@@ -3,7 +3,7 @@
 import numpy as np
 from ._intersection_over_union import intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
-from ._filter_similarity_matrix import suppression_threshold, label_wise_maximum
+from ._filter_similarity_matrix import suppressed_maximal
 from sklearn.metrics import confusion_matrix
 
 def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwargs):
@@ -54,7 +54,7 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
-    method_filter = kwargs.get('filter', suppression_threshold)
+    method_filter = kwargs.get('filter', suppressed_maximal)
     method_matching = kwargs.get('matching', max_similarity)
     
     # Calculate image similarity matrix img_sim based on chosen method and
