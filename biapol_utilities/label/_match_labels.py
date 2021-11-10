@@ -3,7 +3,7 @@
 import numpy as np
 from ._intersection_over_union import intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
-from ._filter_similarity_matrix import suppressed_maximal
+from ._filter_similarity_matrix import suppressed_similarity
 
 from sklearn.metrics import confusion_matrix
 from skimage.segmentation import relabel_sequential
@@ -57,7 +57,7 @@ def match_labels(label_image_x, label_image_y, **kwargs):
     """
     
     method_metric = kwargs.get('metric', intersection_over_union_matrix)
-    method_filter = kwargs.get('filter', suppressed_maximal)
+    method_filter = kwargs.get('filter', suppressed_similarity)
     method_matching = kwargs.get('matching', max_similarity)
     
     

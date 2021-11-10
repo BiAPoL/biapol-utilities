@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
-def suppressed_maximal(matrix, threshold = 0.25):
+def suppressed_similarity(matrix, threshold = 0.25):
     """
-    Suppresses entries in a similarity matrix below a defined threshold and removes
-    all non-maximal entries
+    Suppresses entries in a similarity matrix below a defined threshold
 
     Parameters
     ----------
@@ -31,7 +30,5 @@ def suppressed_maximal(matrix, threshold = 0.25):
         # Keep only ious above threshold
     
     matrix[matrix < threshold] = 0.0
-    matrix[matrix < matrix.max(axis=0)] = 0.0
-    matrix[matrix < threshold] = 0
     
     return matrix
