@@ -56,11 +56,11 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
-    # relabel label_image_y to keep overlap matrix small
-    label_image_y, _, _ = relabel_sequential(label_image_y)
-    
     method_filter = kwargs.get('filter', suppressed_maximal)
     method_matching = kwargs.get('matching', max_similarity)
+    
+    # relabel label_image_y to keep overlap matrix small
+    label_image_y, _, _ = relabel_sequential(label_image_y)
     
     # Calculate image similarity matrix img_sim based on chosen method and
     # ignore the first row/columnm, because it corresponds to background
