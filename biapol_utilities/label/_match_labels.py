@@ -2,6 +2,7 @@
 
 import numpy as np
 from ._intersection_over_union import thresholded_intersection_over_union_matrix
+from ._matching_algorithms import max_similarity
 
 def match_labels_stack(label_stack, method=thresholded_intersection_over_union_matrix, **kwargs):
     """Match labels from subsequent slices with specified method
@@ -51,19 +52,10 @@ def match_labels(label_image_x, label_image_y, method=thresholded_intersection_o
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
+    method_matching = kwargs.get('matching', max_similarity)
+    
     # Calculate image similarity matrix img_sim based on chosen method and
     # ignore the first row/columnm, because it corresponds to background
-    img_sim = method(label_image_y, label_image_x, **kwargs)[1:,1:]
-    mmax = label_image_x.max()
+    similarity_matrix = method(label_image_y, label_image_x, **kwargs)[1:,1:]
     
-    if img_sim.size > 0:
-        # Pick value with highest IoU value
-        istitch = img_sim.argmax(axis=1) + 1
-        ino = np.nonzero(img_sim.max(axis=1)==0.0)[0]  # Find unpaired labels
-        
-        # append unmatched labels and background to lookup table
-        istitch[ino] = np.arange(mmax+1, mmax+len(ino)+1, 1, int)  
-        mmax += len(ino)
-        istitch = np.append(np.array(0), istitch)
-        
-        return istitch[label_image_y]
+    return method_matching(label_image_x, label_image_y, similarity_matrix)
