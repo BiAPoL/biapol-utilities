@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from ._intersection_over_union import thresholded_intersection_over_union_matrix, intersection_over_union_matrix
+from ._intersection_over_union import intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppression_threshold, label_wise_maximum
 from sklearn.metrics import confusion_matrix
 
-def match_labels_stack(label_stack, method=thresholded_intersection_over_union_matrix, **kwargs):
+def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwargs):
     """Match labels from subsequent slices with specified method
 
     Parameters
@@ -32,7 +32,7 @@ def match_labels_stack(label_stack, method=thresholded_intersection_over_union_m
             
     return label_stack
 
-def match_labels(label_image_x, label_image_y, method=confusion_matrix, **kwargs):
+def match_labels(label_image_x, label_image_y, method=intersection_over_union_matrix, **kwargs):
     """Match labels in label_image_y with labels in label_image_x based on similarity
     as defined by the passed method.
     

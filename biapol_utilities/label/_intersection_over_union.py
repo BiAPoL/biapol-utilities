@@ -2,35 +2,10 @@
 
 import numpy as np
 from ._label_overlap_matrix import label_overlap_matrix
-
-def thresholded_intersection_over_union_matrix(label_image_x, label_image_y, minimum_overlap=0.25):
-    """Computes the intersection-over-union matrix of all labels in the two label images pair-wise.
-    Afterwards, a binary matrix is computed with value=1 if the computed overlap is above a given threshold,
-    0 otherwise.
-
-    Parameters
-    ----------
-    label_image_x: ND-array, int
-        a label image
-    label_image_y: ND-array, int
-        another label image
-    minimum_overlap: float
-        threshold representing the minimum amount of overlap labels have to have so that they are considered
-        overlapping and get a 1 in the thresholded matrix.
-
-    Returns
-    -------
-    ND-array, int
-        a binary matrix
-    """
-    matrix = intersection_over_union_matrix(label_image_x, label_image_y)
-
-    # apply threshold
-    return matrix >= minimum_overlap
+from sklearn import metrics
 
 def intersection_over_union_matrix(label_image_x, label_image_y):
     """Generates a matrix with intersection over union of all mask pairs
-
     How it works:
     The overlap matrix is a lookup table of the area of intersection
     between each set of labels (true and predicted). The true labels
@@ -45,7 +20,6 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     added together. This is equivalent to the union of the label areas
     except for the duplicated overlap area, so the overlap matrix is
     subtracted to find the union matrix.
-
     From: https://github.com/MouseLand/cellpose/blob/6fddd4da98219195a2d71041fb0e47cc69a4b3a6/cellpose/metrics.py#L165
     
     Parameters
@@ -54,19 +28,17 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
         label image, where 0=background; 1,2... are label masks
     label_image_y: ND-array, int
         label image, where 0=background; 1,2... are label masks
-
     Returns
     -------
     iou: ND-array, float
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
-
     See Also
     --------
     ..[0] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
     """
     
     # Calculate overlap matrix
-    overlap = label_overlap_matrix(label_image_x, label_image_y)
+    overlap = metrics.confusion_matrix(label_image_x.ravel(), label_image_y.ravel())
     
     # Measure correctly labeled pixels
     n_pixels_pred = np.sum(overlap, axis=0, keepdims=True)
