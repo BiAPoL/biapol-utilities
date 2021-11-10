@@ -34,7 +34,7 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwa
             
     return label_stack
 
-def match_labels(label_image_x, label_image_y, method=intersection_over_union_matrix, **kwargs):
+def match_labels(label_image_x, label_image_y, **kwargs):
     """Match labels in label_image_y with labels in label_image_x based on similarity
     as defined by the passed method.
     
@@ -56,17 +56,22 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
         Processed version of label_image_y with labels corresponding to label_image_x.
     """
     
+    method_metric = kwargs.get('metric', intersection_over_union_matrix)
     method_filter = kwargs.get('filter', suppressed_maximal)
     method_matching = kwargs.get('matching', max_similarity)
+    
     
     # relabel label_image_y to keep overlap matrix small
     label_image_y, _, _ = relabel_sequential(label_image_y)
     
-    # Calculate image similarity matrix img_sim based on chosen method and
-    # ignore the first row/columnm, because it corresponds to background
-    similarity_matrix = method(label_image_y.flatten(),
-                               label_image_x.flatten(),
-                               **kwargs)[1:,1:]
+    # Calculate image similarity metric
+    similarity_matrix = method_metric(label_image_y.flatten(),
+                                      label_image_x.flatten())[1:,1:]
+    
+    # Filter similarity metric matrix
     similarity_matrix = method_filter(similarity_matrix)
     
-    return method_matching(label_image_x, label_image_y, similarity_matrix)
+    # Apply matching technique
+    output = method_matching(label_image_x, label_image_y, similarity_matrix)
+    
+    return output
