@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from ._label_overlap_matrix import label_overlap_matrix
 from sklearn import metrics
 
 def intersection_over_union_matrix(label_image_x, label_image_y):

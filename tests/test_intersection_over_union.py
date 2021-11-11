@@ -38,4 +38,3 @@ def test_intersection_over_union_matrix():
 if __name__ == "__main__":
     test_iou()
     test_intersection_over_union_matrix()
-    

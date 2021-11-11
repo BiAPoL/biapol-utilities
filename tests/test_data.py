@@ -13,3 +13,6 @@ def test_labels_colormap():
     assert np.allclose(lut.colors[1], [0.8916548, 0.45756748, 0.77818808], tolerance)
     assert np.allclose(lut.colors[1000], [0.11423668, 0.98120855, 0.55004896], tolerance)
 
+if __name__ == "__main__":
+    test_labels_colormap()
+

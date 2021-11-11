@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from skimage.segmentation import relabel_sequential
 from ._intersection_over_union import intersection_over_union_matrix
 from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_similarity
