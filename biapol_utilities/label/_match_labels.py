@@ -6,8 +6,7 @@ from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_similarity
 
 
-def match_labels_stack(label_stack, method=intersection_over_union_matrix,
-                       **kwargs):
+def match_labels_stack(label_stack, **kwargs):
     """
     Match labels from subsequent slices with specified method
 
@@ -15,12 +14,24 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix,
     ----------
     label_stack : 3D-array, int
         Stack of 2D label images to be stitched with axis order ZYX
-    method : callable, optional
+    *metric*: callable, optional
+        Method to be used to generate a metric of similarity between labels
+        in subsequent slices. Must return a matrix with
+        `shape=(max(n, m), max(n, m))`, where n and m are the present labels
+        in two subsequent slices z and z+1. The values in the matrix must be
+        normalized to a range of [0, 1], where 0 and signify minimal or maximal
+        similarity between two labels.
+        Default is `intersection_over_union_matrix`
+    *filter*:ccallable, optional
+        Method to be used to filter values from the similarity matrix. This can
+        help to speed up the matching process if, fo instance, entries in the
+        similarity matrix below a defined threshold are set to zero. Default is
+        `suppressed_similarity(similiarity_matrix, threshold=0.3)`
+    *matching* : callable, optional
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
-        `m` labels in the following slice. The default is
-        thresholded_intersection_over_union_matrix.
+        `m` labels in the following slice. The default is `max_similarity`.
 
     Returns
     -------
@@ -28,10 +39,10 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix,
         Stack of stitched labels
     """
 
-    # iterate over masks
+    # iterate over stack of label images
     for i in range(len(label_stack)-1):
         label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
-                                        method=method, **kwargs)
+                                        **kwargs)
 
     return label_stack
 
@@ -47,12 +58,24 @@ def match_labels(label_image_x, label_image_y, **kwargs):
         Image that should serve as a reference for label-matching
     label_image_y : nd-array
         Image the labels of which should be paired with labels from imageA
-    method : callable, optional
+    *metric*: callable, optional
+        Method to be used to generate a metric of similarity between labels
+        in subsequent slices. Must return a matrix with
+        `shape=(max(n, m), max(n, m))`, where n and m are the present labels
+        in two subsequent slices z and z+1. The values in the matrix must be
+        normalized to a range of [0, 1], where 0 and signify minimal or maximal
+        similarity between two labels.
+        Default is `intersection_over_union_matrix`
+    *filter*:ccallable, optional
+        Method to be used to filter values from the similarity matrix. This can
+        help to speed up the matching process if, fo instance, entries in the
+        similarity matrix below a defined threshold are set to zero. Default is
+        `suppressed_similarity(similiarity_matrix, threshold=0.3)`
+    *matching* : callable, optional
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
-        `m` labels in the following slice. The default is
-        thresholded_intersection_over_union_matrix.
+        `m` labels in the following slice. The default is `max_similarity`.
 
     Returns
     -------
