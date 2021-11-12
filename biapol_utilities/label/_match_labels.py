@@ -6,7 +6,10 @@ from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_similarity
 
 
-def match_labels_stack(label_stack, **kwargs):
+def match_labels_stack(label_stack,
+                       metric_method=intersection_over_union_matrix,
+                       filter_method=suppressed_similarity,
+                       matching_method=max_similarity):
     """
     Match labels from subsequent slices with specified method
 
@@ -14,7 +17,7 @@ def match_labels_stack(label_stack, **kwargs):
     ----------
     label_stack : 3D-array, int
         Stack of 2D label images to be stitched with axis order ZYX
-    *metric*: callable, optional
+    *metric_method*: callable, optional
         Method to be used to generate a metric of similarity between labels
         in subsequent slices. Must return a matrix with
         `shape=(max(n, m), max(n, m))`, where n and m are the present labels
@@ -22,12 +25,12 @@ def match_labels_stack(label_stack, **kwargs):
         normalized to a range of [0, 1], where 0 and signify minimal or maximal
         similarity between two labels.
         Default is `intersection_over_union_matrix`
-    *filter*:ccallable, optional
+    *filter_method*: callable, optional
         Method to be used to filter values from the similarity matrix. This can
         help to speed up the matching process if, fo instance, entries in the
         similarity matrix below a defined threshold are set to zero. Default is
         `suppressed_similarity(similiarity_matrix, threshold=0.3)`
-    *matching* : callable, optional
+    *matching_method* : callable, optional
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
@@ -42,12 +45,17 @@ def match_labels_stack(label_stack, **kwargs):
     # iterate over stack of label images
     for i in range(len(label_stack)-1):
         label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
-                                        **kwargs)
+                                        metric_method=metric_method,
+                                        filter_method=filter_method,
+                                        matching_method=matching_method)
 
     return label_stack
 
 
-def match_labels(label_image_x, label_image_y, **kwargs):
+def match_labels(label_image_x, label_image_y,
+                 metric_method=intersection_over_union_matrix,
+                 filter_method=suppressed_similarity,
+                 matching_method=max_similarity):
     """
     Match labels in label_image_y with labels in label_image_x based on
     similarity as defined by the passed method.
@@ -84,21 +92,17 @@ def match_labels(label_image_x, label_image_y, **kwargs):
         label_image_x.
     """
 
-    method_metric = kwargs.get('metric', intersection_over_union_matrix)
-    method_filter = kwargs.get('filter', suppressed_similarity)
-    method_matching = kwargs.get('matching', max_similarity)
-
     # relabel label_image_y to keep overlap matrix small
     label_image_y, _, _ = relabel_sequential(label_image_y)
 
     # Calculate image similarity metric
-    similarity_matrix = method_metric(label_image_y.ravel(),
+    similarity_matrix = metric_method(label_image_y.ravel(),
                                       label_image_x.ravel())[1:, 1:]
 
     # Filter similarity metric matrix
-    similarity_matrix = method_filter(similarity_matrix)
+    similarity_matrix = filter_method(similarity_matrix)
 
     # Apply matching technique
-    output = method_matching(label_image_x, label_image_y, similarity_matrix)
+    output = matching_method(label_image_x, label_image_y, similarity_matrix)
 
     return output
