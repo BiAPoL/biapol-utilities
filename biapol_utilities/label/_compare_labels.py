@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from biapol_utilities import measure
+from sklearn.metrics import jaccard_score
 import pandas as pd
 
 
@@ -42,8 +42,7 @@ def compare_labels(label_image_x, label_image_y):
     df = pd.DataFrame(columns=['label', 'jaccard_score'])
 
     # calculate Jaccard score
-    jc_score = measure.labelwise_jaccard_score(label_image_x,
-                                               label_image_y)
+    jc_score = jaccard_score(label_image_x, label_image_y, average=None)
     dc_score = (2 * jc_score) / (1 + jc_score)
 
     df['label'] = labels
