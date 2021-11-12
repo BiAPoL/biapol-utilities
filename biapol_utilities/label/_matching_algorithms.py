@@ -49,3 +49,9 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
         istitch = np.append(np.array(0), istitch)
 
         return istitch[label_image_y]
+
+    else:
+        raise ValueError('Similarity matrix dimension was expected to have '
+                         'size MxM but was found to have size '
+                         f'{similarity_matrix.size}. Check calculation of'
+                         'similarity matrix for errors.')
