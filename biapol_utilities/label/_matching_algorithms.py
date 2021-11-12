@@ -15,7 +15,7 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
     label_image_y : ND-array, int
         Labbelled input image, the labels of which will be matched up with the
         labels in label_image_x based on the chosen input metric
-    metric_matrix : 2D-array, float
+    similarity_matrix : 2D-array, float
         matrix containing the metric that defines the similarity of labels
         in label_image_x and label_image_y, with axis=0 referring to the labels
         of label_image_x. In other words, the entry similarity_matrix[i, j]
