@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-import numpy as np
 
-def suppressed_similarity(matrix, threshold = 0.25):
+
+def suppressed_similarity(matrix, threshold=0.25):
     """
     Suppresses entries in a similarity matrix below a defined threshold
 
@@ -13,7 +13,8 @@ def suppressed_similarity(matrix, threshold = 0.25):
         to the "similarity" between label i in in image X and label j in
         an image Y
     threshold : float, optional
-        Values below *threshold* will be set to zero in the similarity matrix. The default is 0.25.
+        Values below *threshold* will be set to zero in the similarity matrix.
+        The default is 0.25.
 
     Returns
     -------
@@ -21,14 +22,16 @@ def suppressed_similarity(matrix, threshold = 0.25):
         Similarity matrix with suppressed values
 
     """
-    
+
     if not len(matrix.shape) == 2:
-        raise ValueError(f'Dimension of similarity matrix was expected NxD but was found {matrix.shape}')
-        
+        raise ValueError('Dimension of similarity matrix was '
+                         f'expected NxD but was found {matrix.shape}')
+
     if threshold < 0 or threshold >= 1:
-        raise ValueError(f'Provided threshold must be between 0 and 1 but was {threshold}')
+        raise ValueError('Provided threshold must be between' +
+                         f'0 and 1 but was {threshold}')
         # Keep only ious above threshold
-    
+
     matrix[matrix < threshold] = 0.0
-    
+
     return matrix
