@@ -26,7 +26,8 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
     -------
     ND-array
         Relabelled version of input_image_y. Unmatched labels are appended to
-        the set of matched labels.
+        the set of matched labels and thus, the total number of labels may
+        increase.
 
     """
 
