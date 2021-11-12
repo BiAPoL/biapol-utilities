@@ -92,8 +92,8 @@ def match_labels(label_image_x, label_image_y, **kwargs):
     label_image_y, _, _ = relabel_sequential(label_image_y)
 
     # Calculate image similarity metric
-    similarity_matrix = method_metric(label_image_y.flatten(),
-                                      label_image_x.flatten())[1:, 1:]
+    similarity_matrix = method_metric(label_image_y.ravel(),
+                                      label_image_x.ravel())[1:, 1:]
 
     # Filter similarity metric matrix
     similarity_matrix = method_filter(similarity_matrix)
