@@ -7,13 +7,17 @@ import pandas as pd
 
 def compare_labels(label_image_x, label_image_y):
     """
-    Compares two label images label_image_x and label_image_y regarding the
+    Compares two label images to determine the
     label-wise Jaccard- and Dice scores.
     The Jaccard-score is defined as the intersection over union of two labelled
     images.
     The Dice score S can be derived from the Jaccard-score J through the
     following relation:
     .. math:: S = \frac{2J}{1+J}.
+    
+    See also
+    --------
+    .. [1] https://en.wikipedia.org/wiki/Jaccard_index
 
     Parameters
     ----------
