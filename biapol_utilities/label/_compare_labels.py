@@ -20,13 +20,14 @@ def compare_labels(label_image_x, label_image_y):
     label_image_x : ND-array, int
         label image of arbitrary dimensions.
     label_image_y : ND-array, int
-        label image which will be compared to `label_image_x`. It should have the same dimensions.
+        label image which will be compared to `label_image_x`, must have the
+        same dimensions.
 
     Returns
     -------
-    pandas DataFrame with columns `['label', 'jaccard_score', 'dice_score']`. Each row
-    corresponds to the measured quantitiy (Jaccard- or Dice score) of the
-    respective label.
+    pandas DataFrame with columns `['label', 'jaccard_score', 'dice_score']`.
+    Each row corresponds to the measured quantitiy (Jaccard- or Dice score)
+    of the respective label.
     """
 
     # Flatten input
