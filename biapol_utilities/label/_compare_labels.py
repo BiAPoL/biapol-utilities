@@ -39,7 +39,7 @@ def compare_labels(label_image_x, label_image_y):
 
     # get list of present labels in bothn images and allocate results
     labels = np.unique(np.hstack([label_image_x, label_image_y]))
-    df = pd.DataFrame(columns=['label', 'jaccard_score'])
+    df = pd.DataFrame(columns=['label', 'jaccard_score', 'dice_score'])
 
     # calculate Jaccard score
     jc_score = jaccard_score(label_image_x, label_image_y, average=None)
