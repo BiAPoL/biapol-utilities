@@ -10,7 +10,7 @@ def compare_labels(label_image_x, label_image_y):
     Compares two label images to determine the
     label-wise Jaccard- and Dice scores.
     The Jaccard-score is defined as the intersection over union of two labelled
-    images.
+    images [1].
     The Dice score S can be derived from the Jaccard-score J through the
     following relation:
     .. math:: S = \frac{2J}{1+J}.
