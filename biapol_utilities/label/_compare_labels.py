@@ -20,7 +20,7 @@ def compare_labels(label_image_x, label_image_y):
     label_image_x : ND-array, int
         label image of arbitrary dimensions.
     label_image_y : ND-array, int
-        Predicted label image which will be compared to label_image_x.
+        label image which will be compared to `label_image_x`. It should have the same dimensions.
 
     Returns
     -------
