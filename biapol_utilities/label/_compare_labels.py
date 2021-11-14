@@ -30,9 +30,9 @@ def compare_labels(label_image_x, label_image_y):
     of the respective label.
     """
 
-    # Flatten input
-    label_image_x = label_image_x.flatten()
-    label_image_y = label_image_y.flatten()
+    # Convert image to 1D array. Makes elemt-wise comparison of arrays simpler.
+    label_image_x = label_image_x.ravel()
+    label_image_y = label_image_y.ravel()
 
     if not label_image_x.shape == label_image_y.shape:
         raise Exception('Input images must have same dimension but have '
