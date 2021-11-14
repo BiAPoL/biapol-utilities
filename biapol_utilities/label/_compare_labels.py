@@ -24,7 +24,7 @@ def compare_labels(label_image_x, label_image_y):
 
     Returns
     -------
-    pandas dataframe with columns `[label, jaccard_score, dice_score]. Each row
+    pandas DataFrame with columns `['label', 'jaccard_score', 'dice_score']`. Each row
     corresponds to the measured quantitiy (Jaccard- or Dice score) of the
     respective label.
     """
