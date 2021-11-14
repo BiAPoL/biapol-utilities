@@ -14,6 +14,10 @@ def compare_labels(label_image_x, label_image_y):
     The Dice score S can be derived from the Jaccard-score J through the
     following relation:
     .. math:: S = \frac{2J}{1+J}.
+    
+    See also
+    --------
+    .. [1] https://en.wikipedia.org/wiki/Jaccard_index
 
     Parameters
     ----------
