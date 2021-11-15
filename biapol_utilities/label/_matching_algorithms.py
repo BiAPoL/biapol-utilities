@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+from biapol_utilities import utilities
 
 
 def max_similarity(label_image_x, label_image_y, similarity_matrix):
@@ -134,7 +135,8 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
             continue
 
         # Sort list of preferred partners (label) according to preference value
-        prefs, partners = sort_lists(non_zero_preferences, non_zero_partners)
+        prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
+                                                    non_zero_partners)
 
         men.append({
             'Name': label,
@@ -169,7 +171,8 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
             continue
 
         # Sort partner indeces according to preference score
-        prefs, partners = sort_lists(non_zero_preferences, non_zero_partners)
+        prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
+                                                    non_zero_partners)
 
         women.append({
             'Name': label,
@@ -179,9 +182,9 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
             })
 
     # Make dictionary that assigns `man["Name"]` to his index in list `men`
-    men_by_name = {
+    men_by_name = dict(
         (d["Name"], dict(d, index=index)) for (index, d) in enumerate(men)
-        }
+        )
 
     # Iterate over women and let them propose to men
     while len(women) > 0:
@@ -251,13 +254,3 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
         LUT[w['Name']] = LUT.max() + 1
 
     return LUT[label_image_y]
-
-
-def sort_lists(list1, list2):
-    if type(list1) == np.ndarray:
-        list1 = list1.tolist()
-
-    if type(list2) == np.ndarray:
-        list2 = list2.tolist()
-    list1, list2 = zip(*sorted(zip(list1, list2)))
-
