@@ -34,7 +34,7 @@ def sort_list_pairs(list1, list2, **kwargs):
     -------
     .. [0] https://stackoverflow.com/a/9764364
     """
-    order = kwargs.get('descending')
+    order = kwargs.get('order', 'descending')
 
     if type(list1) == np.ndarray:
         list1 = list1.tolist()
