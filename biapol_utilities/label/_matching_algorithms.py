@@ -5,6 +5,8 @@ import numpy as np
 
 def max_similarity(label_image_x, label_image_y, similarity_matrix):
     """
+    Maximum-similarity algorithm for label-matching.
+
     Matches labels in two input label images (label_image_x and label_image_y)
     based on the maximal value in the similarity_matrix.
 
@@ -30,7 +32,6 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
         increase.
 
     """
-
     # Suppress non-maximal entries
     similarity_matrix[similarity_matrix < similarity_matrix.max(axis=0)] = 0.0
 
@@ -59,7 +60,9 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
 
 def gale_shapley(label_image_x, label_image_y, similarity_matrix):
     """
-    Implementation of Gale-Shapley alhorithm (a.k.a. stable-marriage algorithm)
+    Gale-Shapley stable-marriage algorithm for label-matching.
+
+    Implementation of Gale-Shapley's solution of the stable-marriage problem
     [0, 1] to match labels from two label images (`label_image_x` and
     `label_image_y`) based on a mutual set of preferences that are passed as
     `similarity_matrix`. Unmatchable labels in `label_image_x` maintain their
@@ -89,7 +92,6 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
     .. [1] https://doi.org/10.1080/00029890.1962.11989827
 
     """
-
     # Get set of input labels from both datasets and combined labels
     list_of_men = np.unique(np.append(0, label_image_x.ravel()))
     list_of_women = np.unique(np.append(0, label_image_y.ravel()))
