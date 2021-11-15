@@ -60,13 +60,15 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
 
 def gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
-    list_of_men = np.unique(np.append(0, label_image_x.ravel())).astype(np.uint64)
-    list_of_women = np.unique(np.append(0, label_image_y.ravel())).astype(np.uint64)
-
+    # Get set of input labels from both datasets and combined labels
+    list_of_men = np.unique(np.append(0, label_image_x.ravel()))
+    list_of_women = np.unique(np.append(0, label_image_y.ravel()))
     set_of_labels = np.unique([label_image_x, label_image_y])
 
+    # Highest label found
     mmax = np.max([list_of_men.max(), list_of_women.max()])
 
+    # Allocate lists for unmatchable labels
     unmatchable_men = []
     unmatchable_women = []
 
@@ -91,25 +93,23 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # If label is among set of labels_x, but has no match in label_y
         if len(non_zero_partners) == 0:
-            man = {
+            unmatchable_men.append({
                 'Name': label,
                 'Preference': None,
                 'Partner': None,
                 'Engaged': False
-                }
-            unmatchable_men.append(man)
+                })
             continue
 
         # Sort list of preferred partners (label) according to preference value
         prefs, partners = sort_lists(non_zero_preferences, non_zero_partners)
 
-        man = {
+        men.append({
             'Name': label,
             'Preference': list(partners),
             'Partner': None,
             'Engaged': False
-            }
-        men.append(man)
+            })
 
     # Repeat with women
     women = []
@@ -128,43 +128,42 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # If label is among set of labels_y, but has no match in label_x
         if len(non_zero_partners) == 0:
-            woman = {
-                    'Name': label,
-                    'Preference': None,
-                    'Partner': None,
-                    'Engaged': False
-                    }
-            unmatchable_women.append(woman)
+            unmatchable_women.append({
+                'Name': label,
+                'Preference': None,
+                'Partner': None,
+                'Engaged': False
+                })
             continue
 
         # Sort partner indeces according to preference score
         prefs, partners = sort_lists(non_zero_preferences, non_zero_partners)
 
-        woman = {
+        women.append({
             'Name': label,
             'Preference': list(partners),
             'Partner': None,
             'Engaged': False
-            }
-        women.append(woman)
+            })
 
-    men_by_name = build_dict(men, key="Name")
+    # Make dictionary that assigns `man["Name"]` to his index in list `men`
+    men_by_name = {
+        (d["Name"], dict(d, index=index)) for (index, d) in enumerate(men)
+        }
 
     # Iterate over women and let them propose to men
     while len(women) > 0:
         w = women[0]
-        del women[0]  # remove woman from waiting hall
+        del women[0]  # remove woman from queue
 
-        # If all possible partners rejected this woman:
+        # If all possible partners rejected this woman, i.e.
+        # this woman has zero remaining preferences:
         if len(w['Preference']) == 0:
             unmatchable_women.append(w)
             continue
 
-        # Find partner from dictionary
+        # Find partner from dictionary of men
         m = men_by_name.get(w['Preference'][0])
-
-        if m is None:
-            print('Here!')
 
         # If man has no partner yet
         if not m['Engaged']:
@@ -172,14 +171,13 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
             w['Partner'] = m
             m['Engaged'], w['Engaged'] = True, True
 
+        # If man has partner
         else:
-            try:
-                # Chek if this woman is higher or lower in m's Preference list
-                pref_m = np.asarray(m['Preference'], dtype=(np.uint64))
-                pos_current_w = np.argwhere(pref_m == m['Partner']['Name']).ravel()[0]
-                pos_new_w = np.argwhere(pref_m == w['Name']).ravel()[0]
-            except Exception:
-                print('Halt')
+
+            # Check if this woman is higher or lower in m's Preference list
+            pref_m = np.asarray(m['Preference'], dtype=(np.uint64))
+            pos_current_w = np.argwhere(pref_m == m['Partner']['Name']).ravel()[0]
+            pos_new_w = np.argwhere(pref_m == w['Name']).ravel()[0]
 
             # Check who is further up on m's preference list
             if pos_new_w > pos_current_w:
@@ -201,13 +199,15 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
                 w['Partner'] = m
                 m['Engaged'], w['Engaged'] = True, True
 
-    # Find remaining, unmatched men and delete them from dict of matched men
-    remaining_singles = [idx for idx in men_by_name.keys() if men_by_name[idx]['Engaged'] == False]
+    # Find remaining, unmatched men and delete them from dict of men
+    # Thus, only matched up men and their respective partners are in this dict.
+    remaining_singles = [idx for idx in men_by_name.keys() if not men_by_name[idx]['Engaged']]
     if len(remaining_singles) > 0:
         remaining_singles = [men_by_name.pop(idx) for idx in remaining_singles]
         unmatchable_men.append(remaining_singles)
 
-    # Unravel assignment dictionary
+    # Create a look-up table that assigns labels in label_image_y (aka women)
+    # to labels in label_image_x (aka men)
     LUT = np.arange(0, mmax+1, 1, dtype=np.uint64)
 
     # Assign matchable women to new labels
@@ -222,7 +222,7 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
 
 def build_dict(seq, key):
-    return dict((d[key], dict(d, index=index)) for (index, d) in enumerate(seq))
+    return
 
 
 def sort_lists(list1, list2):
@@ -233,4 +233,3 @@ def sort_lists(list1, list2):
         list2 = list2.tolist()
     list1, list2 = zip(*sorted(zip(list1, list2)))
     return list1[::-1], list2[::-1]
-
