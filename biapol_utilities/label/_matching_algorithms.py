@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
-from copy import deepcopy
 
 
 def max_similarity(label_image_x, label_image_y, similarity_matrix):

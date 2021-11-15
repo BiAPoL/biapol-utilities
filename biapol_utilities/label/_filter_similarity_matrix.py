@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-def suppressed_similarity(matrix, threshold=0.15):
+def suppressed_similarity(matrix, threshold=0.25):
     """
     Suppresses entries in a similarity matrix below a defined threshold
 
@@ -35,4 +35,3 @@ def suppressed_similarity(matrix, threshold=0.15):
     matrix[matrix < threshold] = 0.0
 
     return matrix
-
