@@ -33,6 +33,9 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
         increase.
 
     """
+    # Remove background-label from similarity matrix
+    similarity_matrix = similarity_matrix[1:, 1:]
+
     # Suppress non-maximal entries
     similarity_matrix[similarity_matrix < similarity_matrix.max(axis=0)] = 0.0
 
