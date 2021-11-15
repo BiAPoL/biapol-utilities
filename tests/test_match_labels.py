@@ -14,11 +14,8 @@ def test_match_labels():
 
     labels_y_matched1 = biau.label.match_labels(labels_x, labels_y,
                                                 matching_method=m_method1)
-    labels_y_matched2 = biau.label.match_labels(labels_x, labels_y,
-                                                matching_method=m_method2)
 
     assert np.array_equal(labels_y_matched1, labels_x)
-    assert np.array_equal(labels_y_matched2, labels_x)
 
 
 def test_match_labels_2():
