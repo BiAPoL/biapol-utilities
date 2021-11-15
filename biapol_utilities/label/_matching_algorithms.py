@@ -58,6 +58,37 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
 
 
 def gale_shapley(label_image_x, label_image_y, similarity_matrix):
+    """
+    Implementation of Gale-Shapley alhorithm (a.k.a. stable-marriage algorithm)
+    [0, 1] to match labels from two label images (`label_image_x` and
+    `label_image_y`) based on a mutual set of preferences that are passed as
+    `similarity_matrix`. Unmatchable labels in `label_image_x` maintain their
+    previous labels whereas unmatchable labels in `label_image_y` may be
+    assigned to new labels, thus potentially increasing the total number of
+    labels.
+
+    Parameters
+    ----------
+    label_image_x : ND-array, int
+        label image that serves as reference label image
+    label_image_y : ND-array, int
+        Label image, the labels of which are assigned to `label_image_x`
+    similarity_matrix : NxN, float
+        similarity matrix where `similarity_matrix[i, j]` corresponds to the
+        similarity/preference to match the i-th and j-th entry from the set of
+        labels `set(label_image_x, label_image_y)` with each other.
+
+    Returns
+    -------
+    ND-array, int
+        Copy of label_image_y with labels assigned to labels_image_x.
+
+    See Also
+    --------
+    [0] https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
+    [1] https://doi.org/10.1080/00029890.1962.11989827
+
+    """
 
     # Get set of input labels from both datasets and combined labels
     list_of_men = np.unique(np.append(0, label_image_x.ravel()))
@@ -218,10 +249,6 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
         LUT[w['Name']] = LUT.max() + 1
 
     return LUT[label_image_y]
-
-
-def build_dict(seq, key):
-    return
 
 
 def sort_lists(list1, list2):
