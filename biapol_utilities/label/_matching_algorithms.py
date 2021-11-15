@@ -260,4 +260,4 @@ def sort_lists(list1, list2):
     if type(list2) == np.ndarray:
         list2 = list2.tolist()
     list1, list2 = zip(*sorted(zip(list1, list2)))
-    return list1[::-1], list2[::-1]
+
