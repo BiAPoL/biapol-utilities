@@ -83,10 +83,10 @@ def gale_shapley(label_image_x, label_image_y, similarity_matrix):
     ND-array, int
         Copy of label_image_y with labels assigned to labels_image_x.
 
-    See Also
-    --------
-    [0] https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
-    [1] https://doi.org/10.1080/00029890.1962.11989827
+    References
+    ----------
+    .. [0] https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm
+    .. [1] https://doi.org/10.1080/00029890.1962.11989827
 
     """
 
