@@ -3,6 +3,9 @@
 import numpy as np
 from skimage.segmentation import relabel_sequential
 from ._intersection_over_union import intersection_over_union_matrix
+from ._matching_algorithms import max_similarity, gale_shapley
+from ._filter_similarity_matrix import suppressed_similarity
+import tqdm
 
 def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwargs):
     """Match labels from subsequent slices with specified method
@@ -23,13 +26,13 @@ def match_labels_stack(label_stack, method=intersection_over_union_matrix, **kwa
         Stack of stitched masks
     """
 
-    if method == intersection_over_union_matrix:
-        
-        # iterate over masks
-        for i in range(len(label_stack)-1):
-            label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
-                                            method=method, **kwargs)
-            
+    # iterate over stack of label images
+    for i in tqdm.tqdm(range(len(label_stack)-1)):
+        label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
+                                        metric_method=metric_method,
+                                        filter_method=filter_method,
+                                        matching_method=matching_method)
+
     return label_stack
 
 def match_labels(label_image_x, label_image_y, method=intersection_over_union_matrix, **kwargs):
@@ -64,25 +67,26 @@ def match_labels(label_image_x, label_image_y, method=intersection_over_union_ma
     
     # relabel label_image_y to keep overlap matrix small
     label_image_y, _, _ = relabel_sequential(label_image_y)
-    
-    
-    # Calculate image similarity matrix img_sim based on chosen method
-    img_sim = method(label_image_y, label_image_x)[1:,1:]
-    mmax = label_image_x.max()
-    
-    if img_sim.size > 0:
-        
-        # Keep only ious above threshold
-        img_sim[img_sim < threshold] = 0.0
-        img_sim[img_sim < img_sim.max(axis=0)] = 0.0
-        
-        # Pick value with highest IoU value
-        istitch = img_sim.argmax(axis=1) + 1
-        ino = np.nonzero(img_sim.max(axis=1) == 0.0)[0]  # Find unpaired labels
-        
-        # append unmatched labels and background to lookup table
-        istitch[ino] = np.arange(mmax+1, mmax+len(ino)+1, 1, int)  
-        mmax += len(ino)
-        istitch = np.append(np.array(0), istitch)
-        
-        return istitch[label_image_y]
+
+    # Calculate image similarity metric
+    similarity_matrix = metric_method(label_image_y.ravel(),
+                                      label_image_x.ravel())
+
+    if similarity_matrix.shape[0] == 1098:
+        print('Halt')
+
+    # Force-match background with background
+    similarity_matrix[0, :] = 0
+    similarity_matrix[:, 0] = 0
+    similarity_matrix[0, 0] = 1.0
+
+    # Filter similarity metric matrix
+    if filter_method is None:
+        pass
+    else:
+        similarity_matrix = filter_method(similarity_matrix)
+
+    # Apply matching technique
+    output = matching_method(label_image_x, label_image_y, similarity_matrix)
+
+    return output
