@@ -1,13 +1,13 @@
-Welcome to BiaPol utilities's documentation!
+Welcome to BiAPoL utilities's documentation!
 ============================================
 
+.. automodule:: biapol_utilities.label
+    :members:
+    :imported-members:
+
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 3
    :caption: Contents:
-
-   source/modules
-
-
 
 
 
