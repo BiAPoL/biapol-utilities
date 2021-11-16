@@ -104,9 +104,7 @@ def match_labels(label_image_x, label_image_y,
     similarity_matrix[0, 0] = 1.0
 
     # Filter similarity metric matrix
-    if filter_method is None:
-        pass
-    else:
+    if filter_method is not None:
         similarity_matrix = filter_method(similarity_matrix)
 
     # Apply matching technique
