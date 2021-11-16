@@ -4,7 +4,7 @@ import numpy as np
 from biapol_utilities import utilities
 
 
-def max_similarity(label_image_x, label_image_y, similarity_matrix):
+def match_max_similarity(label_image_x, label_image_y, similarity_matrix):
     """
     Maximum-similarity algorithm for label-matching.
 
@@ -62,7 +62,7 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
                          'similarity matrix for errors.')
 
 
-def gale_shapley(label_image_x, label_image_y, similarity_matrix):
+def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
     """
     Gale-Shapley stable-marriage algorithm for label-matching.
 
