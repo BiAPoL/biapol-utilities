@@ -30,8 +30,8 @@ def suppressed_similarity(matrix, threshold=0.25):
     if threshold < 0 or threshold >= 1:
         raise ValueError('Provided threshold must be between' +
                          f'0 and 1 but was {threshold}')
-        # Keep only ious above threshold
-
+        
+    # Keep only ious above threshold
     matrix[matrix < threshold] = 0.0
 
     return matrix
