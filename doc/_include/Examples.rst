@@ -8,8 +8,8 @@ Label module
     :titlesonly:
     :maxdepth: 0
 
-    Match labels <../notebooks/label/match_labels.ipynb>
-    Compare segmentations <../notebooks/label/Compare_segmentations.ipynb>
+    Match labels <../../notebooks/label/match_labels.ipynb>
+    Compare segmentations <../../notebooks/label/Compare_segmentations.ipynb>
 
 Data module
 ------------------

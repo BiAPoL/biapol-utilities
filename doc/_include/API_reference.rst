@@ -1,5 +1,5 @@
-API reference
-=============================
+API Reference
+=============
 
 
 The label module
@@ -8,6 +8,8 @@ The label module
 .. currentmodule:: biapol_utilities
 
 .. autosummary::
+    :recursive:
+    :toctree: generated
 
     label.compare_labels
     label.intersection_over_union_matrix
