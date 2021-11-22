@@ -7,7 +7,8 @@ Label module
 .. toctree::
     :titlesonly:
     :maxdepth: 0
-    Matching labels <../notebooks/label/match_labels.ipynb>
+
+    Match labels <../notebooks/label/match_labels.ipynb>
     Compare segmentations <../notebooks/label/Compare_segmentations.ipynb>
 
 Data module
