@@ -15,6 +15,7 @@
     <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The BiAPoL API reference" href="api.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -31,108 +32,18 @@
 
           <div class="body" role="main">
             
-  <section id="module-biapol_utilities.label">
-<span id="welcome-to-biapol-utilities-s-documentation"></span><h1>Welcome to BiAPoL utilities’s documentation!<a class="headerlink" href="#module-biapol_utilities.label" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="biapol_utilities.label.intersection_over_union_matrix">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">intersection_over_union_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_image_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_image_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.intersection_over_union_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a matrix with intersection over union of all mask pairs</p>
-<p>How it works:
-The overlap matrix is a lookup table of the area of intersection
-between each set of labels (true and predicted). The true labels
-are taken to be along axis 0, and the predicted labels are taken
-to be along axis 1. The sum of the overlaps along axis 0 is thus
-an array giving the total overlap of the true labels with each of
-the predicted labels, and likewise the sum over axis 1 is the
-total overlap of the predicted labels with each of the true labels.
-Because the label 0 (background) is included, this sum is guaranteed
-to reconstruct the total area of each label. Adding this row and
-column vectors gives a 2D array with the areas of every label pair
-added together. This is equivalent to the union of the label areas
-except for the duplicated overlap area, so the overlap matrix is
-subtracted to find the union matrix.</p>
-<p>Source: <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>label_image_x</strong> (<em>ND-array</em><em>, </em><em>int</em>) – label image, where 0=background; 1,2… are label masks</p></li>
-<li><p><strong>label_image_y</strong> (<em>ND-array</em><em>, </em><em>int</em>) – label image, where 0=background; 1,2… are label masks</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>iou</strong> – matrix of IOU pairs of size [x.max()+1, y.max()+1]</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ND-array, float</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p><a class="reference external" href="https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix">https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match labels in label_image_y with labels in label_image_x.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>label_image_x</strong> (<em>nd-array</em>) – Image that should serve as a reference for label-matching</p></li>
-<li><p><strong>label_image_y</strong> (<em>nd-array</em>) – Image the labels of which should be paired with labels from imageA</p></li>
-<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Pairing method to be used. The default is ‘iou’ (intersection over union).</p>
-<dl>
-<dt><em>iou (intersection over union)</em>: The intersection over union is used to</dt><dd><p>measure the overlap between labels in both images. The label with
-highest overlap is chosen as counterpart label</p>
-<dl class="simple">
-<dt>iou_streshold: float, optional</dt><dd><p>Threshold value above which two labels are accepted as overlapping.
-The default value is 0.25</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Processed version of imageB with labels corresponding to imageA.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>nd-array</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="biapol_utilities.label.match_labels_stack">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels_stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_stack</span></em>, <em class="sig-param"><span class="pre">method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels_stack" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match labels from subsequent slices with specified method</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>label_stack</strong> (<em>3D-array</em><em>, </em><em>int</em>) – Stack of 2D label images to be stitched with axis order ZYX</p></li>
-<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Method to be used for stitching the masks. The default is intersection_over_union_matrix with a stitch threshold of 0.25.
-<em>stitch_threshold</em> : float</p>
-<blockquote>
-<div><p>Threshold value for iou value above which two labels are considered identical.
-The default value is 0.25</p>
-</div></blockquote>
-</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Stack of stitched masks</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>3D-array, int</p>
-</dd>
-</dl>
-</dd></dl>
-
+  <section id="welcome-to-biapol-utilities-s-documentation">
+<h1>Welcome to BiAPoL utilities’s documentation!<a class="headerlink" href="#welcome-to-biapol-utilities-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The BiAPoL API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-biapol_utilities.label">The label module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#module-biapol_utilities.data">The data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#the-utilities-module">The utilities module</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
 <section id="indices-and-tables">
@@ -161,11 +72,16 @@ The default value is 0.25</p>
 
 
 <h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">The BiAPoL API reference</a></li>
+</ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="api.html" title="next chapter">The BiAPoL API reference</a></li>
   </ul></li>
 </ul>
 </div>
