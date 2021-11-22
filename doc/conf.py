@@ -12,6 +12,7 @@
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath('../biapol_utilities'))
 
 
@@ -31,12 +32,15 @@ release = '0.0.1'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
+    'alabaster',  # use alabaster theme (e.g. read the docs)
+    'sphinx.ext.autodoc',  # Converts docstrings to html
     'sphinx.ext.coverage',
     'sphinx.ext.napoleon',
-    'sphinx.ext.mathjax',
-    'nbsphinx',
-    'sphinx.ext.autosummary'
+    'sphinx.ext.mathjax',  # Print mmathematical expressions
+    'nbsphinx',  # link notebooks
+    'sphinx.ext.autosummary',  # Make module lists in table
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.extlinks'  # Link external pages
 ]
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
@@ -54,15 +58,25 @@ exclude_patterns = [
     '**/.ipynb_checkpoints'
     ]
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
 
 html_theme = 'alabaster'
 
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+    ]
+}
+
+html_theme_options = {
+    'logo': 'logos/biapol_logo.png',
+}
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".

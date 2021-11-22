@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="biapol_utilities.label.compare_labels" href="generated/biapol_utilities.label.compare_labels.html" />
-    <link rel="prev" title="Examples" href="Examples.html" />
+    <link rel="prev" title="Quantitative segmentation quality estimation" href="notebooks/label/Compare_segmentations.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -37,8 +37,11 @@
             
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<p>This is the class and function reference of biapol-utilities. Please refer to the examples for further details, as the class and function raw specifications may not be enough to give full guidelines on their uses.</p>
 <section id="the-label-module">
 <h2>The label module<a class="headerlink" href="#the-label-module" title="Permalink to this headline">¶</a></h2>
+<p>The label module bundles functions that operate on label images, i.e. images with annotated objects. The idendity of
+an object is encoded in the pixel value which must be an integer number.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -51,7 +54,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="generated/biapol_utilities.label.intersection_over_union_matrix.html#biapol_utilities.label.intersection_over_union_matrix" title="biapol_utilities.label.intersection_over_union_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label.intersection_over_union_matrix</span></code></a>(...)</p></td>
 <td><p>Generates a matrix with intersection over union of all mask pairs</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="generated/biapol_utilities.label.match_labels_stack.html#biapol_utilities.label.match_labels_stack" title="biapol_utilities.label.match_labels_stack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label.match_labels_stack</span></code></a>(label_stack[, method])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/biapol_utilities.label.match_labels.html#biapol_utilities.label.match_labels" title="biapol_utilities.label.match_labels"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label.match_labels</span></code></a>(label_image_x, label_image_y)</p></td>
+<td><p>Match labels in label_image_y with labels in label_image_x.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/biapol_utilities.label.match_labels_stack.html#biapol_utilities.label.match_labels_stack" title="biapol_utilities.label.match_labels_stack"><code class="xref py py-obj docutils literal notranslate"><span class="pre">label.match_labels_stack</span></code></a>(label_stack[, method])</p></td>
 <td><p>Match labels from subsequent slices with specified method</p></td>
 </tr>
 </tbody>
@@ -59,13 +65,14 @@
 </section>
 <section id="the-data-module">
 <h2>The data module<a class="headerlink" href="#the-data-module" title="Permalink to this headline">¶</a></h2>
+<p>The data module provides example data to be usedin the examples section.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">data.blobs</span></code>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/biapol_utilities.data.blobs.html#biapol_utilities.data.blobs" title="biapol_utilities.data.blobs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">data.blobs</span></code></a>()</p></td>
 <td><p>Gray-level &quot;blobs&quot; image [1].</p></td>
 </tr>
 </tbody>
@@ -80,7 +87,12 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">BiAPoL utilities</a></h1>
+<p class="logo">
+  <a href="../index.html">
+    <img class="logo" src="../_static/logos/biapol_logo.png" alt="Logo"/>
+    
+  </a>
+</p>
 
 
 
@@ -94,12 +106,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-label-module">The label module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/biapol_utilities.label.compare_labels.html">biapol_utilities.label.compare_labels</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/biapol_utilities.label.intersection_over_union_matrix.html">biapol_utilities.label.intersection_over_union_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/biapol_utilities.label.match_labels_stack.html">biapol_utilities.label.match_labels_stack</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-label-module">The label module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-data-module">The data module</a></li>
 </ul>
 </li>
@@ -109,7 +116,7 @@
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="Examples.html" title="previous chapter">Examples</a></li>
+      <li>Previous: <a href="notebooks/label/Compare_segmentations.html" title="previous chapter">Quantitative segmentation quality estimation</a></li>
       <li>Next: <a href="generated/biapol_utilities.label.compare_labels.html" title="next chapter">biapol_utilities.label.compare_labels</a></li>
   </ul></li>
 </ul>
@@ -124,14 +131,6 @@
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>

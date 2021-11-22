@@ -1,11 +1,11 @@
 Welcome to BiAPoL utilities's documentation!
 ============================================
 
-On this page, we provide docuemntation pages for our API and provide
+On this page, we provide documentation pages for our API and provide
 comprehensive examples on how to use the functions in our library.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
    :caption: Contents:
 
    _include/Examples
@@ -18,3 +18,9 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+Ressources
+==================
+
+   * BiAPoL group blog: `<https://biapol.github.io/blog/>`_.
+   * Source code: `<https://github.com/BiAPoL/biapol-utilities>`_.
