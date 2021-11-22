@@ -130,10 +130,10 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
         # If label is among set of labels_x, but has no match in label_y
         if len(non_zero_partners) == 0:
             unmatchable_men.append({
-                'Name': label,
-                'Preference': None,
-                'Partner': None,
-                'Engaged': False
+                'Name': label,  # Label assigned to this instance
+                'Preference': None,  # Vector with preferences
+                'Partner': None,  # Partnered label
+                'Engaged': False  # Marital status
                 })
             continue
 
@@ -142,10 +142,10 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
                                                     non_zero_partners)
 
         men.append({
-            'Name': label,
-            'Preference': list(partners),
-            'Partner': None,
-            'Engaged': False
+            'Name': label,  # Label assigned to this instance
+            'Preference': list(partners),  # Vector with preferences
+            'Partner': None,  # Partnered label
+            'Engaged': False  # Marital status
             })
 
     # Repeat with women
@@ -166,10 +166,10 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
         # If label is among set of labels_y, but has no match in label_x
         if len(non_zero_partners) == 0:
             unmatchable_women.append({
-                'Name': label,
-                'Preference': None,
-                'Partner': None,
-                'Engaged': False
+                'Name': label,  # Label assigned to this instance
+                'Preference': None,  # Vector with preferences
+                'Partner': None,  # Partnered label
+                'Engaged': False,  # Marital status
                 })
             continue
 
@@ -178,10 +178,10 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
                                                     non_zero_partners)
 
         women.append({
-            'Name': label,
-            'Preference': list(partners),
-            'Partner': None,
-            'Engaged': False
+            'Name': label,  # Label assigned to this instance
+            'Preference': list(partners),  # Vector with preferences
+            'Partner': None,  # Partnered label
+            'Engaged': False,  # Marital status
             })
 
     # Make dictionary that assigns `man["Name"]` to his index in list `men`
