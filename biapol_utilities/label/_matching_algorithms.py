@@ -64,8 +64,6 @@ def match_max_similarity(label_image_x, label_image_y, similarity_matrix):
 
 def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
     """
-    women = y
-    men  = x
     Gale-Shapley stable-marriage algorithm for label-matching.
 
     Implementation of Gale-Shapley's solution of the stable-marriage problem
