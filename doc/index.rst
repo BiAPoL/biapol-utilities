@@ -6,8 +6,8 @@ Welcome to BiAPoL utilities's documentation!
    :maxdepth: 3
    :caption: Contents:
 
-   api
-
+   _include/Examples
+   _include/API_reference
 
 
 Indices and tables
