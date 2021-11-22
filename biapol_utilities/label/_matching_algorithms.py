@@ -64,6 +64,8 @@ def match_max_similarity(label_image_x, label_image_y, similarity_matrix):
 
 def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
     """
+    women = y
+    men  = x
     Gale-Shapley stable-marriage algorithm for label-matching.
 
     Implementation of Gale-Shapley's solution of the stable-marriage problem
@@ -97,27 +99,27 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
     """
     # Get set of input labels from both datasets and combined labels
-    list_of_men = np.unique(np.append(0, label_image_x.ravel()))
-    list_of_women = np.unique(np.append(0, label_image_y.ravel()))
+    list_of_labels_x = np.unique(np.append(0, label_image_x.ravel()))
+    list_of_labels_y = np.unique(np.append(0, label_image_y.ravel()))
     set_of_labels = np.unique([label_image_x, label_image_y])
 
     # Highest label found
-    mmax = np.max([list_of_men.max(), list_of_women.max()])
+    mmax = np.max([list_of_labels_x.max(), list_of_labels_y.max()])
 
     # Allocate lists for unmatchable labels
-    unmatchable_men = []
-    unmatchable_women = []
+    X_unmatchable = []
+    Y_unmatchable = []
 
-    # Create a list with 'man' entries, whereas each entry is a dict with
-    # the man's Name, his marital partner and his preferences.
-    men = []
+    # Create a list with 'x' entries, whereas each entry is a dict with
+    # the x's Name, his marital partner and his preferences.
+    X = []
 
-    # list of man refers to label, entry-1 refers to respective entry in
+    # list of x refers to label, entry-1 refers to respective entry in
     # similarity matrix
     for idx, label in enumerate(set_of_labels):
 
         # is this label among set of labels_x?
-        if not any(list_of_men == label):
+        if not any(list_of_labels_x == label):
             continue
 
         # get array with preferences
@@ -129,7 +131,7 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # If label is among set of labels_x, but has no match in label_y
         if len(non_zero_partners) == 0:
-            unmatchable_men.append({
+            X_unmatchable.append({
                 'Name': label,  # Label assigned to this instance
                 'Preference': None,  # Vector with preferences
                 'Partner': None,  # Partnered label
@@ -141,7 +143,7 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
         prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
                                                     non_zero_partners)
 
-        men.append({
+        X.append({
             'Name': label,  # Label assigned to this instance
             'Preference': list(partners),  # Vector with preferences
             'Partner': None,  # Partnered label
@@ -149,11 +151,11 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
             })
 
     # Repeat with women
-    women = []
+    Y = []
     for idx, label in enumerate(set_of_labels):
 
         # is this label among set of labels_y?
-        if not any(list_of_women == label):
+        if not any(list_of_labels_y == label):
             continue
 
         # get array with preferences
@@ -165,7 +167,7 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # If label is among set of labels_y, but has no match in label_x
         if len(non_zero_partners) == 0:
-            unmatchable_women.append({
+            Y_unmatchable.append({
                 'Name': label,  # Label assigned to this instance
                 'Preference': None,  # Vector with preferences
                 'Partner': None,  # Partnered label
@@ -177,83 +179,83 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
         prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
                                                     non_zero_partners)
 
-        women.append({
+        Y.append({
             'Name': label,  # Label assigned to this instance
             'Preference': list(partners),  # Vector with preferences
             'Partner': None,  # Partnered label
             'Engaged': False,  # Marital status
             })
 
-    # Make dictionary that assigns `man["Name"]` to his index in list `men`
-    men_by_name = dict(
-        (d["Name"], dict(d, index=index)) for (index, d) in enumerate(men)
+    # Make dictionary that assigns `X["Name"]` to his index in list `X`
+    X_by_Name = dict(
+        (d["Name"], dict(d, index=index)) for (index, d) in enumerate(X)
         )
 
-    # Iterate over women and let them propose to men
-    while len(women) > 0:
-        w = women[0]
-        del women[0]  # remove woman from queue
+    # Iterate over Y and let them propose to men
+    while len(Y) > 0:
+        y = Y[0]
+        del Y[0]  # remove y from queue
 
-        # If all possible partners rejected this woman, i.e.
-        # this woman has zero remaining preferences:
-        if len(w['Preference']) == 0:
-            unmatchable_women.append(w)
+        # If all possible partners rejected this y, i.e.
+        # this y has zero remaining preferences:
+        if len(y['Preference']) == 0:
+            Y_unmatchable.append(y)
             continue
 
         # Find partner from dictionary of men
-        m = men_by_name.get(w['Preference'][0])
+        x = X_by_Name.get(y['Preference'][0])
 
-        # If man has no partner yet
-        if not m['Engaged']:
-            m['Partner'] = w
-            w['Partner'] = m
-            m['Engaged'], w['Engaged'] = True, True
+        # If x has no partner yet
+        if not x['Engaged']:
+            x['Partner'] = y
+            y['Partner'] = x
+            x['Engaged'], y['Engaged'] = True, True
 
-        # If man has partner
+        # If x has partner
         else:
 
-            # Check if this woman is higher or lower in m's Preference list
-            pref_m = np.asarray(m['Preference'], dtype=(np.uint64))
-            pos_current_w = np.argwhere(pref_m == m['Partner']['Name']).ravel()[0]
-            pos_new_w = np.argwhere(pref_m == w['Name']).ravel()[0]
+            # Check if this y is higher or lower in x's Preference list
+            pref_x = np.asarray(x['Preference'], dtype=(np.uint64))
+            pos_current_y = np.argwhere(pref_x == x['Partner']['Name']).ravel()[0]
+            pos_new_y = np.argwhere(pref_x == y['Name']).ravel()[0]
 
             # Check who is further up on m's preference list
-            if pos_new_w > pos_current_w:
+            if pos_new_y > pos_current_y:
 
-                # If w is lower on man's list than current partner:
-                # Remove this man from women's list and add to queue again
-                del w['Preference'][0]
-                women.append(w)
+                # If y is lower on x's list than current partner:
+                # Remove this x from y's list and add to queue again
+                del y['Preference'][0]
+                Y.append(y)
             else:
 
-                # Remove current partner from this man and add to queue
-                w_rejected = m['Partner']
-                w_rejected['Engaged'] = False
-                w_rejected['Partner'] = None
-                women.append(w_rejected)
+                # Remove current partner from this x and add to queue
+                y_rejected = x['Partner']
+                y_rejected['Engaged'] = False
+                y_rejected['Partner'] = None
+                Y.append(y_rejected)
 
-                # Engage m and w
-                m['Partner'] = w
-                w['Partner'] = m
-                m['Engaged'], w['Engaged'] = True, True
+                # Engage x and y
+                x['Partner'] = y
+                y['Partner'] = x
+                x['Engaged'], y['Engaged'] = True, True
 
-    # Find remaining, unmatched men and delete them from dict of men
-    # Thus, only matched up men and their respective partners are in this dict.
-    remaining_singles = [idx for idx in men_by_name.keys() if not men_by_name[idx]['Engaged']]
+    # Find remaining, unmatchedXand delete them from dict of X
+    # Thus, only matched upXand their respective partners are in this dict.
+    remaining_singles = [idx for idx in X_by_Name.keys() if not X_by_Name[idx]['Engaged']]
     if len(remaining_singles) > 0:
-        remaining_singles = [men_by_name.pop(idx) for idx in remaining_singles]
-        unmatchable_men.append(remaining_singles)
+        remaining_singles = [X_by_Name.pop(idx) for idx in remaining_singles]
+        X_unmatchable.append(remaining_singles)
 
-    # Create a look-up table that assigns labels in label_image_y (aka women)
+    # Create a look-up table that assigns labels in label_image_y (aka Y)
     # to labels in label_image_x (aka men)
     LUT = np.arange(0, mmax+1, 1, dtype=np.uint64)
 
-    # Assign matchable women to new labels
-    for idx in men_by_name.keys():
-        LUT[men_by_name[idx]['Partner']['Name']] = idx
+    # Assign matchable Y to new labels
+    for idx in X_by_Name.keys():
+        LUT[X_by_Name[idx]['Partner']['Name']] = idx
 
-    # Lastly, assign unmatchable women to new labels
-    for w in unmatchable_women:
-        LUT[w['Name']] = LUT.max() + 1
+    # Lastly, assign unmatchable Y to new labels
+    for y in Y_unmatchable:
+        LUT[y['Name']] = LUT.max() + 1
 
     return LUT[label_image_y]
