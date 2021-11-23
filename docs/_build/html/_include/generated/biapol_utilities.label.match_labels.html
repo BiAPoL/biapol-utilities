@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>biapol_utilities.label.match_labels &#8212; BiAPoL utilities 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <link rel="stylesheet" href="../../_static/css/hatnotes.css" type="text/css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="biapol_utilities.label.match_labels_stack" href="biapol_utilities.label.match_labels_stack.html" />
+    <link rel="prev" title="biapol_utilities.label.intersection_over_union_matrix" href="biapol_utilities.label.intersection_over_union_matrix.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="biapol-utilities-label-match-labels">
+<h1>biapol_utilities.label.match_labels<a class="headerlink" href="#biapol-utilities-label-match-labels" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
+<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match labels in label_image_y with labels in label_image_x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label_image_x</strong> (<em>nd-array</em>) – Image that should serve as a reference for label-matching</p></li>
+<li><p><strong>label_image_y</strong> (<em>nd-array</em>) – Image the labels of which should be paired with labels from imageA</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Pairing method to be used. The default is ‘iou’ (intersection over union).</p>
+<dl>
+<dt><em>iou (intersection over union)</em>: The intersection over union is used to</dt><dd><p>measure the overlap between labels in both images. The label with
+highest overlap is chosen as counterpart label</p>
+<dl class="simple">
+<dt>iou_streshold: float, optional</dt><dd><p>Threshold value above which two labels are accepted as overlapping.
+The default value is 0.25</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Processed version of imageB with labels corresponding to imageA.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>nd-array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<p class="logo">
+  <a href="../../index.html">
+    <img class="logo" src="../../_static/logos/biapol_logo.png" alt="Logo"/>
+    
+  </a>
+</p>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../API_reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../API_reference.html#the-label-module">The label module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../API_reference.html#the-data-module">The data module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../API_reference.html">API Reference</a><ul>
+      <li>Previous: <a href="biapol_utilities.label.intersection_over_union_matrix.html" title="previous chapter">biapol_utilities.label.intersection_over_union_matrix</a></li>
+      <li>Next: <a href="biapol_utilities.label.match_labels_stack.html" title="next chapter">biapol_utilities.label.match_labels_stack</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Robert Haase, Johannes Müller, Marcelo Zoccoler.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/_include/generated/biapol_utilities.label.match_labels.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
