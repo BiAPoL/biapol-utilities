@@ -43,6 +43,9 @@ extensions = [
     'sphinx.ext.extlinks'  # Link external pages
 ]
 
+# Autosummary uses a customized module template that was taken from here:
+# https://stackoverflow.com/questions/48074094/use-sphinx-autosummary-recursively-to-generate-api-documentation
+
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
 
 # Add any paths that contain templates here, relative to this directory.
