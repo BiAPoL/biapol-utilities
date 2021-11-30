@@ -40,8 +40,11 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
 <span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match labels in label_image_y with labels in label_image_x based on
-similarity as defined by the passed method.</p>
+<dd><p>Match labels in <cite>label_image_y</cite> with labels in <cite>label_image_x</cite>.</p>
+<p>Labels of two passed label images are evaluated regarding their similarity,
+whereas different metrics can be used for this. The labels from
+<cite>label_image_y</cite> are then matched up with the respective corresponding
+labels in <cite>label_image_x</cite> based on the chosen matching algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
