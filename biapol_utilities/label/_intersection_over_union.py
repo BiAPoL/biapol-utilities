@@ -22,7 +22,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     except for the duplicated overlap area, so the overlap matrix is
     subtracted to find the union matrix.
 
-    From: https://github.com/MouseLand/cellpose/blob/6fddd4da98219195a2d71041fb0e47cc69a4b3a6/cellpose/metrics.py#L165
+    Source: [#]_
     
     Parameters
     ----------
@@ -36,9 +36,9 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     iou: ND-array, float
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
 
-    See Also
+    References
     --------
-    ..[0] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
+    .. [#] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
     """
     
     # Calculate overlap matrix
