@@ -50,7 +50,25 @@ def test_match_labels_3():
     assert np.array_equal(labels_y_matched, reference_y_matched)
 
 
+def test_gale_shapley():
+
+    labels_x = np.asarray([0, 1, 2, 3])
+    labels_ref = np.asarray([0, 2, 1, 3])
+
+    similarity_matrix = [[0.1, 0.0, 0.0, 0.0],
+                         [0.0, 0.2, 0.5, 0.8],
+                         [0.0, 0.9, 0.2, 0.5],
+                         [0.0, 0.8, 0.7, 0.81]]
+
+    similarity_matrix = np.asarray(similarity_matrix)
+
+    output = label.match_gale_shapley(labels_x, labels_x, similarity_matrix)
+
+    assert np.array_equal(output, labels_ref)
+
+
 if __name__ == "__main__":
+    test_gale_shapley()
     test_match_labels_3()
     test_match_labels_2()
     test_match_labels()
