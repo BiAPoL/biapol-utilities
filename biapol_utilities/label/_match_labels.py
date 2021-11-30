@@ -17,7 +17,7 @@ def match_labels_stack(label_stack,
     ----------
     label_stack : 3D-array, int
         Stack of 2D label images to be stitched with axis order ZYX
-    *metric_method*: callable, optional
+    metric_method: callable, optional
         Method to be used to generate a metric of similarity between labels
         in subsequent slices. Must return a matrix with
         `shape=(max(n, m), max(n, m))`, where n and m are the present labels
