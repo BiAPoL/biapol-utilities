@@ -40,7 +40,8 @@ extensions = [
     'nbsphinx',  # link notebooks
     'sphinx.ext.autosummary',  # Make module lists in table
     'sphinx.ext.autosectionlabel',
-    'sphinx.ext.extlinks'  # Link external pages
+    'sphinx.ext.extlinks',  # Link external pages
+    'sphinx-prompt'
 ]
 
 # Autosummary uses a customized module template that was taken from here:
