@@ -77,7 +77,7 @@ def match_labels(label_image_x, label_image_y,
         normalized to a range of [0, 1], where 0 and signify minimal or maximal
         similarity between two labels.
         Default is `intersection_over_union_matrix`
-    *filter*:ccallable, optional
+    filter_method: callable, optional
         Method to be used to filter values from the similarity matrix. This can
         help to speed up the matching process if, fo instance, entries in the
         similarity matrix below a defined threshold are set to zero. Default is
