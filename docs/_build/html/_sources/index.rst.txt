@@ -5,11 +5,12 @@ On this page, we provide documentation pages for our API and provide
 comprehensive examples on how to use the functions in our library.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    _include/Examples
    _include/API_reference
+   _include/Contribute
 
 
 Indices and tables
