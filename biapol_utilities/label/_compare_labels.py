@@ -6,18 +6,20 @@ import pandas as pd
 
 
 def compare_labels(label_image_x, label_image_y):
-    """
+    r"""
+    Evaluate differences between two label images.
+
     Compares two label images to determine the
     label-wise Jaccard- and Dice scores.
     The Jaccard-score is defined as the intersection over union of two labelled
-    images [1].
-    The Dice score S can be derived from the Jaccard-score J through the
-    following relation:
-    .. math:: S = \frac{2J}{1+J}.
-    
-    See also
+    images [#]_. The Dice score S can be derived from the Jaccard-score J
+    through the following relation:
+
+    .. math:: S = \frac{2J}{1+J}
+
+    See Also
     --------
-    .. [1] https://en.wikipedia.org/wiki/Jaccard_index
+    .. [#] https://en.wikipedia.org/wiki/Jaccard_index
 
     Parameters
     ----------
@@ -30,10 +32,9 @@ def compare_labels(label_image_x, label_image_y):
     Returns
     -------
     pandas DataFrame with columns `['label', 'jaccard_score', 'dice_score']`.
-    Each row corresponds to the measured quantitiy (Jaccard- or Dice score)
-    of the respective label.
+    Each row corresponds to the measured quantitiy (Jaccard- or Dice score) of
+    the respective label.
     """
-
     # Convert image to 1D array. Makes elemt-wise comparison of arrays simpler.
     label_image_x = label_image_x.ravel()
     label_image_y = label_image_y.ravel()

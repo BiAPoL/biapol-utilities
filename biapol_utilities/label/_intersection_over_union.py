@@ -22,6 +22,8 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     except for the duplicated overlap area, so the overlap matrix is
     subtracted to find the union matrix. Implementation taken from [#]_
 
+    Source: [#]_
+    
     Parameters
     ----------
     label_image_x: ND-array, int
@@ -34,10 +36,9 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     iou: ND-array, float
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
 
-    See Also
+    References
     --------
     .. [#] https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
-    .. [#] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
     """
     # Calculate overlap matrix
     overlap = metrics.confusion_matrix(label_image_x.ravel(),
