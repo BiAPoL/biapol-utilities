@@ -82,7 +82,7 @@ def match_labels(label_image_x, label_image_y,
         help to speed up the matching process if, fo instance, entries in the
         similarity matrix below a defined threshold are set to zero. Default is
         `suppressed_similarity(similiarity_matrix, threshold=0.3)`
-    *matching* : callable, optional
+    matching_method: callable, optional
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
