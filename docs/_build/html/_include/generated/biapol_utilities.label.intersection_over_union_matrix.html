@@ -40,9 +40,8 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.intersection_over_union_matrix">
 <span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">intersection_over_union_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_image_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_image_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.intersection_over_union_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates a matrix with intersection over union of all mask pairs
-How it works:
-The overlap matrix is a lookup table of the area of intersection
+<dd><p>Generate a matrix with intersection over union of all label pairs.</p>
+<p>How it works: The overlap matrix is a lookup table of the area of intersection
 between each set of labels (true and predicted). The true labels
 are taken to be along axis 0, and the predicted labels are taken
 to be along axis 1. The sum of the overlaps along axis 0 is thus
@@ -55,7 +54,6 @@ column vectors gives a 2D array with the areas of every label pair
 added together. This is equivalent to the union of the label areas
 except for the duplicated overlap area, so the overlap matrix is
 subtracted to find the union matrix.</p>
-<p>Source: <a class="footnote-reference brackets" href="#id2" id="id1">1</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -72,8 +70,11 @@ subtracted to find the union matrix.</p>
 </dl>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id1"><span class="brackets">1</span></dt>
 <dd><p><a class="reference external" href="https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix">https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix</a></p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">2</span></dt>
+<dd><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html</a></p>
 </dd>
 </dl>
 </dd></dl>
