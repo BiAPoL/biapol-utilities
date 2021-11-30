@@ -23,3 +23,4 @@
 
 * [ ] My change is the minimal possible work for the desired feature/fix
 * [ ] I updated the documentation where necessary to cover the change
+* [ ] I rebuilt the documentation page to document the change, if necessary
