@@ -69,7 +69,7 @@ def match_labels(label_image_x, label_image_y,
         Image that should serve as a reference for label-matching
     label_image_y : nd-array
         Image the labels of which should be paired with labels from imageA
-    *metric*: callable, optional
+    metric_method: callable, optional
         Method to be used to generate a metric of similarity between labels
         in subsequent slices. Must return a matrix with
         `shape=(max(n, m), max(n, m))`, where n and m are the present labels
