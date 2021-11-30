@@ -20,7 +20,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     column vectors gives a 2D array with the areas of every label pair
     added together. This is equivalent to the union of the label areas
     except for the duplicated overlap area, so the overlap matrix is
-    subtracted to find the union matrix. Implementation taken from [#]_
+    subtracted to find the union matrix.
 
     Source: [#]_
     

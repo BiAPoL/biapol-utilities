@@ -57,7 +57,12 @@ def match_labels(label_image_x, label_image_y,
                  filter_method=suppressed_similarity,
                  matching_method=match_max_similarity):
     """
-    Match labels in label_image_y with labels in label_image_x.
+    Match labels in `label_image_y` with labels in `label_image_x`.
+
+    Labels of two passed label images are evaluated regarding their similarity,
+    whereas different metrics can be used for this. The labels from
+    `label_image_y` are then matched up with the respective corresponding
+    labels in `label_image_x` based on the chosen matching algorithm.
 
     Parameters
     ----------
@@ -98,14 +103,14 @@ def match_labels(label_image_x, label_image_y,
     similarity_matrix = metric_method(label_image_y.ravel(),
                                       label_image_x.ravel())
 
-    # Force-match background with background
-    similarity_matrix[0, :] = 0
-    similarity_matrix[:, 0] = 0
-    similarity_matrix[0, 0] = 1.0
-
     # Filter similarity metric matrix
     if filter_method is not None:
         similarity_matrix = filter_method(similarity_matrix)
+
+    # Force background-background matching:
+    similarity_matrix[0, :] = 0
+    similarity_matrix[:, 0] = 0
+    similarity_matrix[0, 0] = 1.0
 
     # Apply matching technique
     output = matching_method(label_image_x, label_image_y, similarity_matrix)

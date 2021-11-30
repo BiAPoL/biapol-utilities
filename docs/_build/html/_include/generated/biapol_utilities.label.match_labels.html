@@ -39,29 +39,37 @@
 <h1>biapol_utilities.label.match_labels<a class="headerlink" href="#biapol-utilities-label-match-labels" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Match labels in label_image_y with labels in label_image_x.</p>
+<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match labels in <cite>label_image_y</cite> with labels in <cite>label_image_x</cite>.</p>
+<p>Labels of two passed label images are evaluated regarding their similarity,
+whereas different metrics can be used for this. The labels from
+<cite>label_image_y</cite> are then matched up with the respective corresponding
+labels in <cite>label_image_x</cite> based on the chosen matching algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>label_image_x</strong> (<em>nd-array</em>) – Image that should serve as a reference for label-matching</p></li>
 <li><p><strong>label_image_y</strong> (<em>nd-array</em>) – Image the labels of which should be paired with labels from imageA</p></li>
-<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <p>Pairing method to be used. The default is ‘iou’ (intersection over union).</p>
-<dl>
-<dt><em>iou (intersection over union)</em>: The intersection over union is used to</dt><dd><p>measure the overlap between labels in both images. The label with
-highest overlap is chosen as counterpart label</p>
-<dl class="simple">
-<dt>iou_streshold: float, optional</dt><dd><p>Threshold value above which two labels are accepted as overlapping.
-The default value is 0.25</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</p></li>
+<li><p><strong>*metric*</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used to generate a metric of similarity between labels
+in subsequent slices. Must return a matrix with
+<cite>shape=(max(n, m), max(n, m))</cite>, where n and m are the present labels
+in two subsequent slices z and z+1. The values in the matrix must be
+normalized to a range of [0, 1], where 0 and signify minimal or maximal
+similarity between two labels.
+Default is <cite>intersection_over_union_matrix</cite></p></li>
+<li><p><strong>*filter*</strong> (<em>ccallable</em><em>, </em><em>optional</em>) – Method to be used to filter values from the similarity matrix. This can
+help to speed up the matching process if, fo instance, entries in the
+similarity matrix below a defined threshold are set to zero. Default is
+<cite>suppressed_similarity(similiarity_matrix, threshold=0.3)</cite></p></li>
+<li><p><strong>*matching*</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used for matching the labels. This function is supposed
+to return a binary matrix with <cite>shape=(n+1, m+1)</cite> corresponding to
+<cite>match=1</cite>, <cite>no_match=0</cite> of the <cite>n</cite> labels in a given slice and
+<cite>m</cite> labels in the following slice. The default is <cite>max_similarity</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Processed version of imageB with labels corresponding to imageA.</p>
+<dd class="field-even"><p>Processed version of label_image_y with labels corresponding to
+label_image_x.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>nd-array</p>
