@@ -97,10 +97,15 @@ def match_labels(label_image_x, label_image_y,
 
     # Calculate image similarity metric
     similarity_matrix = metric_method(label_image_y.ravel(),
-                                      label_image_x.ravel())[1:, 1:]
+                                      label_image_x.ravel())
 
     # Filter similarity metric matrix
     similarity_matrix = filter_method(similarity_matrix)
+
+    # Force background-background matching:
+    similarity_matrix[0, :] = 0
+    similarity_matrix[:, 0] = 0
+    similarity_matrix[0, 0] = 1.0
 
     # Apply matching technique
     output = matching_method(label_image_x, label_image_y, similarity_matrix)
