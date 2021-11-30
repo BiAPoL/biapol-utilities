@@ -3,7 +3,10 @@
 
 def suppressed_similarity(matrix, threshold=0.25):
     """
-    Suppresses entries in a similarity matrix below a defined threshold
+    Suppress entries in a similarity matrix below a defined threshold.
+
+    This method sets all entries in the passed matrix below a defined threshold
+    to zero, whereas all other entries remain untouched.
 
     Parameters
     ----------
@@ -22,7 +25,6 @@ def suppressed_similarity(matrix, threshold=0.25):
         Similarity matrix with suppressed values
 
     """
-
     if not len(matrix.shape) == 2:
         raise ValueError('Dimension of similarity matrix was '
                          f'expected NxD but was found {matrix.shape}')

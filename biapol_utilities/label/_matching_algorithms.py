@@ -5,8 +5,12 @@ import numpy as np
 
 def max_similarity(label_image_x, label_image_y, similarity_matrix):
     """
-    Matches labels in two input label images (label_image_x and label_image_y)
-    based on the maximal value in the similarity_matrix.
+    Match labels in two input label images.
+
+    This function matches the labels from two input images (label_image_x and
+    label_image_y) based on the maximal value in the similarity_matrix. The
+    labels in `label_image_y` are converted to their respective corresponding
+    labels in `label_image_x` based on the chosen matching algorithm.
 
     Parameters
     ----------
@@ -30,7 +34,6 @@ def max_similarity(label_image_x, label_image_y, similarity_matrix):
         increase.
 
     """
-
     # exclude background from matching
     similarity_matrix = similarity_matrix[1:, 1:]
 

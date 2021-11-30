@@ -11,7 +11,7 @@ def match_labels_stack(label_stack,
                        filter_method=suppressed_similarity,
                        matching_method=max_similarity):
     """
-    Match labels from subsequent slices with specified method
+    Match labels from subsequent slices with specified method.
 
     Parameters
     ----------
@@ -41,7 +41,6 @@ def match_labels_stack(label_stack,
     3D-array, int
         Stack of stitched labels
     """
-
     # iterate over stack of label images
     for i in range(len(label_stack)-1):
         label_stack[i+1] = match_labels(label_stack[i], label_stack[i+1],
@@ -57,8 +56,12 @@ def match_labels(label_image_x, label_image_y,
                  filter_method=suppressed_similarity,
                  matching_method=max_similarity):
     """
-    Match labels in label_image_y with labels in label_image_x based on
-    similarity as defined by the passed method.
+    Match labels in `label_image_y` with labels in `label_image_x`.
+
+    Labels of two passed label images are evaluated regarding their similarity,
+    whereas different metrics can be used for this. The labels from
+    `label_image_y` are then matched up with the respective corresponding
+    labels in `label_image_x` based on the chosen matching algorithm.
 
     Parameters
     ----------
@@ -91,7 +94,6 @@ def match_labels(label_image_x, label_image_y,
         Processed version of label_image_y with labels corresponding to
         label_image_x.
     """
-
     # relabel label_image_y to keep overlap matrix small
     label_image_y, _, _ = relabel_sequential(label_image_y)
 
