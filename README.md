@@ -8,12 +8,10 @@ Collection of utility functions from the biapol group at DFG cluster of excellen
 
 ## Ressources:
 
-* Documentation page: https://biapol.github.io/biapol-utilities
-* Blog page: https://biapol.github.io/blog/
-* Github: https://github.com/BiAPoL
-* Homepage: https://physics-of-life.tu-dresden.de/en/research/core-groups/bio-image-analysis
-* Report bugs:https://github.com/BiAPoL/biapol-utilities/issues
-* Contribute: https://biapol.github.io/biapol-utilities/_build/html/_include/Contribute.html
+* [Documentation](https://biapol.github.io/biapol-utilities)
+* [Source code](https://github.com/BiAPoL/biapol-utilities)
+* [Bug reports are welcome here](https://github.com/BiAPoL/biapol-utilities/issues)
+* [Contribute](https://biapol.github.io/biapol-utilities/_build/html/_include/Contribute.html)
 
 ## Acknowledgements
 Developing biapol-utilities is a community effort. We would like to thank everybody who helped developing and testing. In particular, thanks goes to the contributions of 
