@@ -141,7 +141,8 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # Sort list of preferred partners (label) according to preference value
         prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
-                                                    non_zero_partners)
+                                                    non_zero_partners,
+                                                    order='descending')
 
         X.append({
             'Name': label,  # Label assigned to this instance
@@ -177,7 +178,8 @@ def match_gale_shapley(label_image_x, label_image_y, similarity_matrix):
 
         # Sort partner indeces according to preference score
         prefs, partners = utilities.sort_list_pairs(non_zero_preferences,
-                                                    non_zero_partners)
+                                                    non_zero_partners,
+                                                    order='descending')
 
         Y.append({
             'Name': label,  # Label assigned to this instance
