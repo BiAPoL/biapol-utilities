@@ -5,10 +5,10 @@ from sklearn import metrics
 
 
 def intersection_over_union_matrix(label_image_x, label_image_y):
-    """Generates a matrix with intersection over union of all mask pairs
+    """
+    Generate a matrix with intersection over union of all label pairs.
 
-    How it works:
-    The overlap matrix is a lookup table of the area of intersection
+    How it works: The overlap matrix is a lookup table of the area of intersection
     between each set of labels (true and predicted). The true labels
     are taken to be along axis 0, and the predicted labels are taken
     to be along axis 1. The sum of the overlaps along axis 0 is thus
@@ -22,34 +22,32 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     except for the duplicated overlap area, so the overlap matrix is
     subtracted to find the union matrix.
 
-    Source: [#]_
-    
     Parameters
     ----------
     label_image_x: ND-array, int
         label image, where 0=background; 1,2... are label masks
     label_image_y: ND-array, int
         label image, where 0=background; 1,2... are label masks
-
     Returns
     -------
     iou: ND-array, float
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
 
     References
-    --------
+    ----------
     .. [#] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
+    .. [#] https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
     """
-    
     # Calculate overlap matrix
-    overlap = metrics.confusion_matrix(label_image_x.ravel(), label_image_y.ravel())
-    
+    overlap = metrics.confusion_matrix(label_image_x.ravel(),
+                                       label_image_y.ravel())
+
     # Measure correctly labeled pixels
     n_pixels_pred = np.sum(overlap, axis=0, keepdims=True)
     n_pixels_true = np.sum(overlap, axis=1, keepdims=True)
-    
+
     # Caluclate intersection over union
     iou = overlap / (n_pixels_pred + n_pixels_true - overlap)
     iou[np.isnan(iou)] = 0.0
-    
+
     return iou
