@@ -18,7 +18,7 @@ def sort_list_pairs(list1, list2, **kwargs):
     list2 : list
         List of values that are sorted according to list1.
 
-    *order*: str, optional
+    order: str, optional
         Parameter determines whether returned lists are sorted to
         descending/ascending order of values in `list1`. The default value is
         "descending".
@@ -32,7 +32,7 @@ def sort_list_pairs(list1, list2, **kwargs):
 
     Reference
     -------
-    .. [0] https://stackoverflow.com/a/9764364
+    .. [1] https://stackoverflow.com/a/9764364
     """
     order = kwargs.get('order', 'descending')
 
