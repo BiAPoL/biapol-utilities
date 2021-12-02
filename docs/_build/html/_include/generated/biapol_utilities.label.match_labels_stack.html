@@ -39,27 +39,28 @@
 <h1>biapol_utilities.label.match_labels_stack<a class="headerlink" href="#biapol-utilities-label-match-labels-stack" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.match_labels_stack">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels_stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_stack</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels_stack" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels_stack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_stack</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">match_gale_shapley&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels_stack" title="Permalink to this definition">¶</a></dt>
 <dd><p>Match labels from subsequent slices with specified method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>label_stack</strong> (<em>3D-array</em><em>, </em><em>int</em>) – Stack of 2D label images to be stitched with axis order ZYX</p></li>
-<li><p><strong>*metric_method*</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used to generate a metric of similarity between labels
+<li><p><strong>metric_method</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used to generate a metric of similarity between labels
 in subsequent slices. Must return a matrix with
 <cite>shape=(max(n, m), max(n, m))</cite>, where n and m are the present labels
 in two subsequent slices z and z+1. The values in the matrix must be
 normalized to a range of [0, 1], where 0 and signify minimal or maximal
 similarity between two labels.
 Default is <cite>intersection_over_union_matrix</cite></p></li>
-<li><p><strong>*filter_method*</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used to filter values from the similarity matrix. This can
+<li><p><strong>filter_method</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used to filter values from the similarity matrix. This can
 help to speed up the matching process if, fo instance, entries in the
 similarity matrix below a defined threshold are set to zero. Default is
 <cite>suppressed_similarity(similiarity_matrix, threshold=0.3)</cite></p></li>
-<li><p><strong>*matching_method*</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used for matching the labels. This function is supposed
+<li><p><strong>matching_method</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used for matching the labels. This function is supposed
 to return a binary matrix with <cite>shape=(n+1, m+1)</cite> corresponding to
 <cite>match=1</cite>, <cite>no_match=0</cite> of the <cite>n</cite> labels in a given slice and
-<cite>m</cite> labels in the following slice. The default is <cite>max_similarity</cite>.</p></li>
+<cite>m</cite> labels in the following slice. The default is
+<cite>match_max_similarity</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

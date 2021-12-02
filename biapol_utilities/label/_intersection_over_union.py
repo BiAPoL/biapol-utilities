@@ -23,7 +23,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     subtracted to find the union matrix.
 
     Source: [#]_
-    
+
     Parameters
     ----------
     label_image_x: ND-array, int
@@ -37,7 +37,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
         matrix of IOU pairs of size [x.max()+1, y.max()+1]
 
     References
-    --------
+    ----------
     .. [#] https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
     """
     # Calculate overlap matrix
