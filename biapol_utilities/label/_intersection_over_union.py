@@ -5,10 +5,10 @@ from sklearn import metrics
 
 
 def intersection_over_union_matrix(label_image_x, label_image_y):
-    """Generate a matrix with intersection over union of all label pairs.
+    """
+    Generate a matrix with intersection over union of all label pairs.
 
-    How it works:
-    The overlap matrix is a lookup table of the area of intersection
+    How it works: The overlap matrix is a lookup table of the area of intersection
     between each set of labels (true and predicted). The true labels
     are taken to be along axis 0, and the predicted labels are taken
     to be along axis 1. The sum of the overlaps along axis 0 is thus
@@ -21,8 +21,6 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
     added together. This is equivalent to the union of the label areas
     except for the duplicated overlap area, so the overlap matrix is
     subtracted to find the union matrix.
-
-    Source: [#]_
 
     Parameters
     ----------
@@ -38,6 +36,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
 
     References
     ----------
+    .. [#] https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix
     .. [#] https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
     """
     # Calculate overlap matrix
