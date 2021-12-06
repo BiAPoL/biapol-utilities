@@ -6,21 +6,9 @@ from sklearn import metrics
 
 def jaccard_index_matrix(label_image_x, label_image_y):
     """
-    Generate a matrix with intersection over union of all label pairs.
+    Generate a matrix with mutual jaccard indeces of all label pairs.
 
-    How it works: The overlap matrix is a lookup table of the area of intersection
-    between each set of labels (true and predicted). The true labels
-    are taken to be along axis 0, and the predicted labels are taken
-    to be along axis 1. The sum of the overlaps along axis 0 is thus
-    an array giving the total overlap of the true labels with each of
-    the predicted labels, and likewise the sum over axis 1 is the
-    total overlap of the predicted labels with each of the true labels.
-    Because the label 0 (background) is included, this sum is guaranteed
-    to reconstruct the total area of each label. Adding this row and
-    column vectors gives a 2D array with the areas of every label pair
-    added together. This is equivalent to the union of the label areas
-    except for the duplicated overlap area, so the overlap matrix is
-    subtracted to find the union matrix.
+    How it works: The jaccard index matrix/overlap matrix is a lookup table of the area of intersection between each set of labels (true and predicted). The true labels are taken to be along axis 0, and the predicted labels are taken to be along axis 1. The sum of the overlaps along axis 0 is thus an array giving the total overlap of the true labels with each of the predicted labels, and likewise the sum over axis 1 is the total overlap of the predicted labels with each of the true labels. Because the label 0 (background) is included, this sum is guaranteed to reconstruct the total area of each label. Adding this row and column vectors gives a 2D array with the areas of every label pair added together. This is equivalent to the union of the label areas except for the duplicated overlap area, so the overlap matrix is subtracted to find the union matrix.
 
     Parameters
     ----------
