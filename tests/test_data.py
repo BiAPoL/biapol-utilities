@@ -3,7 +3,7 @@ import numpy as np
 
 
 def test_labels_colormap():
-    lut = biao.labels_colormap()
+    lut = biao.data.labels_colormap()
 
     print(lut.colors[0])
     print(lut.colors[1])
