@@ -33,7 +33,7 @@ def test_jaccard_index_matrix():
                             [0.33, 0.,   0.33, 0.],
                             [0.,   0.,   0.,   0.]])
 
-    iou = biau.jaccard_index_matrix(a, b)
+    iou = biau.label.jaccard_index_matrix(a, b)
 
     assert np.allclose(iou, reference, 0.02)
 

@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="biapol_utilities.label.match_labels_stack" href="biapol_utilities.label.match_labels_stack.html" />
-    <link rel="prev" title="biapol_utilities.label.intersection_over_union_matrix" href="biapol_utilities.label.intersection_over_union_matrix.html" />
+    <link rel="prev" title="biapol_utilities.label.compare_labels" href="biapol_utilities.label.compare_labels.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -39,7 +39,7 @@
 <h1>biapol_utilities.label.match_labels<a class="headerlink" href="#biapol-utilities-label-match-labels" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">jaccard_index_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Match labels in <cite>label_image_y</cite> with labels in <cite>label_image_x</cite>.</p>
 <p>Labels of two passed label images are evaluated regarding their similarity,
 whereas different metrics can be used for this. The labels from
@@ -113,7 +113,7 @@ label_image_x.</p>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
   <li><a href="../API_reference.html">API Reference</a><ul>
-      <li>Previous: <a href="biapol_utilities.label.intersection_over_union_matrix.html" title="previous chapter">biapol_utilities.label.intersection_over_union_matrix</a></li>
+      <li>Previous: <a href="biapol_utilities.label.compare_labels.html" title="previous chapter">biapol_utilities.label.compare_labels</a></li>
       <li>Next: <a href="biapol_utilities.label.match_labels_stack.html" title="next chapter">biapol_utilities.label.match_labels_stack</a></li>
   </ul></li>
   </ul></li>

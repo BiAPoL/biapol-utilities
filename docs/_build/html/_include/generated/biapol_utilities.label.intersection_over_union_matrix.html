@@ -17,8 +17,6 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="biapol_utilities.label.match_labels" href="biapol_utilities.label.match_labels.html" />
-    <link rel="prev" title="biapol_utilities.label.compare_labels" href="biapol_utilities.label.compare_labels.html" />
    
   <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
   
@@ -37,48 +35,6 @@
             
   <section id="biapol-utilities-label-intersection-over-union-matrix">
 <h1>biapol_utilities.label.intersection_over_union_matrix<a class="headerlink" href="#biapol-utilities-label-intersection-over-union-matrix" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="biapol_utilities.label.intersection_over_union_matrix">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">intersection_over_union_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label_image_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_image_y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.intersection_over_union_matrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generate a matrix with intersection over union of all label pairs.</p>
-<p>How it works: The overlap matrix is a lookup table of the area of intersection
-between each set of labels (true and predicted). The true labels
-are taken to be along axis 0, and the predicted labels are taken
-to be along axis 1. The sum of the overlaps along axis 0 is thus
-an array giving the total overlap of the true labels with each of
-the predicted labels, and likewise the sum over axis 1 is the
-total overlap of the predicted labels with each of the true labels.
-Because the label 0 (background) is included, this sum is guaranteed
-to reconstruct the total area of each label. Adding this row and
-column vectors gives a 2D array with the areas of every label pair
-added together. This is equivalent to the union of the label areas
-except for the duplicated overlap area, so the overlap matrix is
-subtracted to find the union matrix.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>label_image_x</strong> (<em>ND-array</em><em>, </em><em>int</em>) – label image, where 0=background; 1,2… are label masks</p></li>
-<li><p><strong>label_image_y</strong> (<em>ND-array</em><em>, </em><em>int</em>) – label image, where 0=background; 1,2… are label masks</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>iou</strong> – matrix of IOU pairs of size [x.max()+1, y.max()+1]</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>ND-array, float</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix">https://clij.github.io/clij2-docs/reference_generateJaccardIndexMatrix</a></p>
-</dd>
-<dt class="label" id="id2"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html">https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
@@ -104,9 +60,9 @@ subtracted to find the union matrix.</p>
 
 <h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../Examples.html">Examples</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../API_reference.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../API_reference.html">API Reference</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Contribute.html">Contribute</a></li>
 </ul>
 
@@ -114,10 +70,6 @@ subtracted to find the union matrix.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../../index.html">Documentation overview</a><ul>
-  <li><a href="../API_reference.html">API Reference</a><ul>
-      <li>Previous: <a href="biapol_utilities.label.compare_labels.html" title="previous chapter">biapol_utilities.label.compare_labels</a></li>
-      <li>Next: <a href="biapol_utilities.label.match_labels.html" title="next chapter">biapol_utilities.label.match_labels</a></li>
-  </ul></li>
   </ul></li>
 </ul>
 </div>

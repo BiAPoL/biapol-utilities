@@ -14,7 +14,7 @@ an object is encoded in the pixel value which must be an integer number.
     :toctree: generated
 
     label.compare_labels
-    label.intersection_over_union_matrix
+    label.jaccard_index_matrix
     label.match_labels
     label.match_labels_stack
 
