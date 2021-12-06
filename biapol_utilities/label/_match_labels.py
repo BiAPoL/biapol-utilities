@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from skimage.segmentation import relabel_sequential
-from ._intersection_over_union import jaccard_index_matrix
+from ._jaccard_index import jaccard_index_matrix
 from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_similarity
 
