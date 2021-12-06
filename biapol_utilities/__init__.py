@@ -19,5 +19,5 @@ __version__ = "0.0.1"
 from . import label
 # from .surface import *
 # from .utilities import *
-from . import utilities
+# from . import utilities
 from . import data
