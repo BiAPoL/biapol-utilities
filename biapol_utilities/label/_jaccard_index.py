@@ -4,7 +4,7 @@ import numpy as np
 from sklearn import metrics
 
 
-def intersection_over_union_matrix(label_image_x, label_image_y):
+def jaccard_index_matrix(label_image_x, label_image_y):
     """
     Generate a matrix with intersection over union of all label pairs.
 

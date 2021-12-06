@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from skimage.segmentation import relabel_sequential
-from ._intersection_over_union import intersection_over_union_matrix
+from ._intersection_over_union import jaccard_index_matrix
 from ._matching_algorithms import max_similarity
 from ._filter_similarity_matrix import suppressed_similarity
 
 
 def match_labels_stack(label_stack,
-                       metric_method=intersection_over_union_matrix,
+                       metric_method=jaccard_index_matrix,
                        filter_method=suppressed_similarity,
                        matching_method=max_similarity):
     """
@@ -52,7 +52,7 @@ def match_labels_stack(label_stack,
 
 
 def match_labels(label_image_x, label_image_y,
-                 metric_method=intersection_over_union_matrix,
+                 metric_method=jaccard_index_matrix,
                  filter_method=suppressed_similarity,
                  matching_method=max_similarity):
     """

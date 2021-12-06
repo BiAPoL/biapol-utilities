@@ -19,12 +19,12 @@ def test_iou():
     b[idx] = 0
     a[idx] = 0
 
-    iou = biau.label.intersection_over_union_matrix(a, b)
+    iou = biau.label.jaccard_index_matrix(a, b)
 
     assert(iou.shape == (len(np.unique([a, b])), len(np.unique([a, b]))))
 
 
-def test_intersection_over_union_matrix():
+def test_jaccard_index_matrix():
     a = np.asarray([1, 1, 2, 2, 0, 0])
     b = np.asarray([3, 2, 2, 0, 0, 1])
 
@@ -33,11 +33,11 @@ def test_intersection_over_union_matrix():
                             [0.33, 0.,   0.33, 0.],
                             [0.,   0.,   0.,   0.]])
 
-    iou = biau.intersection_over_union_matrix(a, b)
+    iou = biau.jaccard_index_matrix(a, b)
 
     assert np.allclose(iou, reference, 0.02)
 
 
 if __name__ == "__main__":
     test_iou()
-    test_intersection_over_union_matrix()
+    test_jaccard_index_matrix()
