@@ -18,10 +18,6 @@ __version__ = "0.0.1"
 # from .measure import *
 from . import label
 # from .surface import *
-<<<<<<< Updated upstream
 # from .utilities import *
-from .data import *
-=======
 from . import utilities
 from . import data
->>>>>>> Stashed changes
