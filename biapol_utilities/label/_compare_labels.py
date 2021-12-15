@@ -17,10 +17,6 @@ def compare_labels(label_image_x, label_image_y):
 
     .. math:: S = \frac{2J}{1+J}
 
-    See Also
-    --------
-    .. [#] https://en.wikipedia.org/wiki/Jaccard_index
-
     Parameters
     ----------
     label_image_x : ND-array, int
@@ -31,9 +27,12 @@ def compare_labels(label_image_x, label_image_y):
 
     Returns
     -------
-    pandas DataFrame with columns `['label', 'jaccard_score', 'dice_score']`.
-    Each row corresponds to the measured quantitiy (Jaccard- or Dice score) of
-    the respective label.
+    Pandas dataframe
+        The function returns a pandas dataframe with columns `['label', 'jaccard_score', 'dice_score']`. Each row corresponds to the measured quantitiy (Jaccard- or Dice score) of the respective label.
+
+    References
+    ----------
+    .. [#] https://en.wikipedia.org/wiki/Jaccard_index
     """
     # Convert image to 1D array. Makes elemt-wise comparison of arrays simpler.
     label_image_x = label_image_x.ravel()

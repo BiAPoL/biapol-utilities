@@ -28,6 +28,7 @@ def intersection_over_union_matrix(label_image_x, label_image_y):
         label image, where 0=background; 1,2... are label masks
     label_image_y: ND-array, int
         label image, where 0=background; 1,2... are label masks
+
     Returns
     -------
     iou: ND-array, float
