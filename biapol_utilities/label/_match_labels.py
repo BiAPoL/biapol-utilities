@@ -2,14 +2,14 @@
 
 from skimage.segmentation import relabel_sequential
 from ._intersection_over_union import intersection_over_union_matrix
-from ._matching_algorithms import max_similarity
+from ._matching_algorithms import match_max_similarity, match_gale_shapley
 from ._filter_similarity_matrix import suppressed_similarity
 
 
 def match_labels_stack(label_stack,
                        metric_method=intersection_over_union_matrix,
                        filter_method=suppressed_similarity,
-                       matching_method=max_similarity):
+                       matching_method=match_gale_shapley):
     """
     Match labels from subsequent slices with specified method.
 
@@ -34,7 +34,8 @@ def match_labels_stack(label_stack,
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
-        `m` labels in the following slice. The default is `max_similarity`.
+        `m` labels in the following slice. The default is
+        `match_max_similarity`.
 
     Returns
     -------
@@ -54,7 +55,7 @@ def match_labels_stack(label_stack,
 def match_labels(label_image_x, label_image_y,
                  metric_method=intersection_over_union_matrix,
                  filter_method=suppressed_similarity,
-                 matching_method=max_similarity):
+                 matching_method=match_gale_shapley):
     """
     Match labels in `label_image_y` with labels in `label_image_x`.
 
@@ -86,7 +87,8 @@ def match_labels(label_image_x, label_image_y,
         Method to be used for matching the labels. This function is supposed
         to return a binary matrix with `shape=(n+1, m+1)` corresponding to
         `match=1`, `no_match=0` of the `n` labels in a given slice and
-        `m` labels in the following slice. The default is `max_similarity`.
+        `m` labels in the following slice. The default is
+        `match_max_similarity`.
 
     Returns
     -------
@@ -102,7 +104,8 @@ def match_labels(label_image_x, label_image_y,
                                       label_image_x.ravel())
 
     # Filter similarity metric matrix
-    similarity_matrix = filter_method(similarity_matrix)
+    if filter_method is not None:
+        similarity_matrix = filter_method(similarity_matrix)
 
     # Force background-background matching:
     similarity_matrix[0, :] = 0

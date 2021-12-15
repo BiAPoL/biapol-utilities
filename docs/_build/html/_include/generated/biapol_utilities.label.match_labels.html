@@ -39,7 +39,7 @@
 <h1>biapol_utilities.label.match_labels<a class="headerlink" href="#biapol-utilities-label-match-labels" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="biapol_utilities.label.match_labels">
-<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">max_similarity&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">biapol_utilities.label.</span></span><span class="sig-name descname"><span class="pre">match_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">label_image_x</span></em>, <em class="sig-param"><span class="pre">label_image_y</span></em>, <em class="sig-param"><span class="pre">metric_method=&lt;function</span> <span class="pre">intersection_over_union_matrix&gt;</span></em>, <em class="sig-param"><span class="pre">filter_method=&lt;function</span> <span class="pre">suppressed_similarity&gt;</span></em>, <em class="sig-param"><span class="pre">matching_method=&lt;function</span> <span class="pre">match_gale_shapley&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#biapol_utilities.label.match_labels" title="Permalink to this definition">¶</a></dt>
 <dd><p>Match labels in <cite>label_image_y</cite> with labels in <cite>label_image_x</cite>.</p>
 <p>Labels of two passed label images are evaluated regarding their similarity,
 whereas different metrics can be used for this. The labels from
@@ -64,7 +64,8 @@ similarity matrix below a defined threshold are set to zero. Default is
 <li><p><strong>matching_method</strong> (<em>callable</em><em>, </em><em>optional</em>) – Method to be used for matching the labels. This function is supposed
 to return a binary matrix with <cite>shape=(n+1, m+1)</cite> corresponding to
 <cite>match=1</cite>, <cite>no_match=0</cite> of the <cite>n</cite> labels in a given slice and
-<cite>m</cite> labels in the following slice. The default is <cite>max_similarity</cite>.</p></li>
+<cite>m</cite> labels in the following slice. The default is
+<cite>match_max_similarity</cite>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>

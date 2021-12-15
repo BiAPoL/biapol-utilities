@@ -46,14 +46,10 @@
 <p>Compares two label images to determine the
 label-wise Jaccard- and Dice scores.
 The Jaccard-score is defined as the intersection over union of two labelled
-images <a href="#id2"><span class="problematic" id="id3"><span id="id1"></span>[#]_</span></a>. The Dice score S can be derived from the Jaccard-score J
+images <a class="footnote-reference brackets" href="#id2" id="id1">1</a>. The Dice score S can be derived from the Jaccard-score J
 through the following relation:</p>
 <div class="math notranslate nohighlight">
 \[S = \frac{2J}{1+J}\]</div>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><code class="xref py py-obj docutils literal notranslate"></code></p>
-</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -63,12 +59,16 @@ same dimensions.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><ul class="simple">
-<li><p>pandas DataFrame with columns <cite>[‘label’, ‘jaccard_score’, ‘dice_score’]</cite>.</p></li>
-<li><p><em>Each row corresponds to the measured quantitiy (Jaccard- or Dice score) of</em></p></li>
-<li><p><em>the respective label.</em></p></li>
-</ul>
-</p>
+<dd class="field-even"><p>The function returns a pandas dataframe with columns <cite>[‘label’, ‘jaccard_score’, ‘dice_score’]</cite>. Each row corresponds to the measured quantitiy (Jaccard- or Dice score) of the respective label.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Pandas dataframe</p>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Jaccard_index">https://en.wikipedia.org/wiki/Jaccard_index</a></p>
 </dd>
 </dl>
 </dd></dl>

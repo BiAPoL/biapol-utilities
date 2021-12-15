@@ -7,12 +7,12 @@ import os
 
 data_dir = os.path.abspath(os.path.dirname(__file__))
 
+
 def blobs():
-    
     """Gray-level "blobs" image [1].
-    
+
     Can be used for segmentation and denoising examples.
-    
+
     Returns
     -------
     blobs : (256, 254) uint8 ndarray
@@ -22,8 +22,8 @@ def blobs():
     ----------
     .. [1] https://imagej.nih.gov/ij/images/
     """
-    
     return io.imread(os.path.join(data_dir, "blobs.png"))
+
 
 def labels_colormap():
     if not hasattr(labels_colormap, "labels_cmap"):
