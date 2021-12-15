@@ -1,9 +1,9 @@
-import biapol_utilities as biao
+import biapol_utilities as biau
 import numpy as np
 
 
 def test_labels_colormap():
-    lut = biao.data.labels_colormap()
+    lut = biau.data.labels_colormap()
 
     print(lut.colors[0])
     print(lut.colors[1])
