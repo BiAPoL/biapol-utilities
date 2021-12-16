@@ -38,3 +38,4 @@ Generate the html files for the page by running
 
 The documentation will then be generated in the ``_build/html`` directory. This will run all the examples, which may take a while. Upon submitting the pull request, the page will then automatically be built and hosted on github pages once the PR is accepted.
 
+*Note*: Please make sure that the documentation html files are built properly before submitting a pull request. Once your changes are pushed to the main branch, the documentation homepage will automatially be rebuilt from the changed source code.
