@@ -9,7 +9,7 @@
 * [ ] Breaking change
 * [ ] Documentation update
 
-## References 
+## References
 
 <!-- Are there related issues? Use e.g. write "closes #1" if this PR closes an issue. -->
 
@@ -19,8 +19,11 @@
 * [ ] I added new tests to cover the code change
 * [ ] All tests pass with my change
 
+## Documentation
+* [ ] I rebuilt the documentation page to ensure building the pages works
+* [ ] I used PEP-8 conformal code styling
+
 ## Final checks
 
 * [ ] My change is the minimal possible work for the desired feature/fix
 * [ ] I updated the documentation where necessary to cover the change
-* [ ] I rebuilt the documentation page to document the change, if necessary
