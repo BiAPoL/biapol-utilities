@@ -16,7 +16,8 @@ utilities
 __version__ = "0.0.1"
 
 # from .measure import *
-from .label import *
+from . import label
 # from .surface import *
-from .utilities import *
-from .data import *
+# from .utilities import *
+# from . import utilities
+from . import data
