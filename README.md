@@ -27,14 +27,21 @@ imshow(label_image, cmap=biau.labels_colormap(), vmin=0, vmax=labels.max())
 ![img.png](docs/_static/example_label_image.png)
 
 More examples are available in our [our example notebooks](https://github.com/BiAPoL/biapol-utilities/tree/main/docs/_include/notebooks/label).
-
-
+Also read our [documentation](https://biapol.github.io/biapol-utilities).
 
 ## Installation
 
 `biapol-utilities` can be installed using pip:
 
 `pip install biapol-utilities`
+
+If you want to develop `biapol-utilities` you can download and install it like this:
+
+```
+git clone https://github.com/BiAPoL/biapol-utilities
+cd biapol-utilities
+pip install -e .
+```
 
 ## Ressources
 
