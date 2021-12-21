@@ -4,7 +4,7 @@
 [![Contributors](https://img.shields.io/github/contributors-anon/BiAPoL/biapol-utilities)](https://github.com/BiAPoL/biapol-utilities/graphs/contributors)
 [![codecov](https://codecov.io/gh/BiAPoL/biapol-utilities/branch/master/graph/badge.svg)](https://codecov.io/gh/BiAPoL/biapol-utilities)
 
-Collection of utility functions from the BiA-PoL group at the DFG Cluster of Excellence "Physics of Life" (POL) @ TU Dresden, Germany. 
+Collection of utility functions from the BiA-PoL group at the DFG Cluster of Excellence "Physics of Life" (PoL) @ TU Dresden, Germany. 
 
 ## Usage 
 
