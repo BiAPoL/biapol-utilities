@@ -16,7 +16,7 @@ biau.label.compare_labels(ground_truth, segmented)
 ```
 ![img.png](docs/_static/example_table.png)
 
-In another example, you can visualize a label images with a nice color map like this:
+In another example, you can visualize a label image with a nice color map like this:
 
 ```python
 import biapol_utilities as biau
