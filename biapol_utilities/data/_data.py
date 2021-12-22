@@ -25,6 +25,24 @@ def blobs():
     return io.imread(os.path.join(data_dir, "blobs.png"))
 
 
+def hourglass():
+    """Gray-level 4D hourglass image [1].
+
+    Can be used for polar transformations, tracking, dimentionality reduction.
+
+    Returns
+    -------
+    hourglass : (50, 100, 200, 200) uint8 ndarray
+        Hourglass 3D+t image depicting an unrealisitc bright half-circle
+        droplet sliding through the glass wall.
+
+    References
+    ----------
+    .. [1] Created with a Fiji macro by Marcelo Leomil Zoccoler
+    """
+    return io.imread(os.path.join(data_dir, "hourglass.tif"))
+
+
 def labels_colormap():
     if not hasattr(labels_colormap, "labels_cmap"):
         state = np.random.RandomState(1234567890)
