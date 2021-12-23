@@ -18,13 +18,14 @@ an object is encoded in the pixel value which must be an integer number.
 
 Transform module
 ------------------
-The transform module transform stuff.
+The transform module contains functions to transform images into other domains
+to ease visualization and quantification of events.
 
 .. toctree::
     :titlesonly:
     :maxdepth: 0
 
-    Warp Polar <notebooks/transform/warp_polar_5D_example.ipynb>
+    Transform to polar coordinates <notebooks/transform/warp_polar_5D_example.ipynb>
 
 Data module
 ------------------

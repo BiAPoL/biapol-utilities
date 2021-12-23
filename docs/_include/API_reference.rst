@@ -33,7 +33,8 @@ The data module provides example data to be usedin the examples section.
 
 The transform module
 --------------------
-The transform module provides functions to transform your data.
+The transform module contains functions to transform images into other domains
+to ease visualization and quantification of events.
 
 .. currentmodule:: biapol_utilities
 
