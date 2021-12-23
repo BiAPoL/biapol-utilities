@@ -26,7 +26,7 @@ def blobs():
 
 
 class Hourglass:
-    """Hourglass object [1].
+    """Hourglass 3D+t image generator [1].
 
     Can be used to generate a Gray-level (8-bit) 3D+t image.
 
