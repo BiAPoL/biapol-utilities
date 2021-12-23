@@ -80,8 +80,8 @@ class Hourglass:
                 else:
                     fill = False
                 if k != 0:
-                    self.image[t, k] = self._create_circle(radius, fill)
-                    * self.glass_value
+                    self.image[t, k] = self._create_circle(radius, fill) *\
+                        self.glass_value
                 if k < ((self.dep // 2) - 1):
                     radius -= 2
                 elif k == ((self.dep // 2) - 1):
@@ -93,8 +93,8 @@ class Hourglass:
                 # Add upper content
                 if ((k >= self.dep // 4) & (k < self.dep // 2)):
                     self.image[t, k] += self._create_circle(content_radius_up,
-                                                            True)
-                    * self.content_value
+                                                            True) *\
+                        self.content_value
 
                     content_radius_up -= 2
             # Add lower arc droplet
@@ -105,8 +105,8 @@ class Hourglass:
                            self.col // 2] = self.content_value
             if t > 1:
                 half_circle = self._create_circle(content_radius_down,
-                                                  False)
-                * self.content_value
+                                                  False) *\
+                    self.content_value
 
                 half_circle[:, :half_circle.shape[1] // 2] = 0
                 self.image[t, ((self.dep // 2) - 1 + t)] += half_circle
