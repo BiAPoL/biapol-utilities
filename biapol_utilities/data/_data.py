@@ -35,23 +35,71 @@ class Hourglass:
     Attributes
     ----------
     radius : int, optional
-        Maximum radius value. It also defines image shape as (radius/2, radius,
-        2*radius, 2*radius)
+        Hourglass maximum radius value. Default value: 100. Minimum value: 1.
+        It also defines image shape as (radius, 2*radius + 1, 2*radius + 1,
+                                        2*radius + 1).
     glass_value: uint8, optional
         Voxel intensity value of the hourglass walls.
     content_value: uint8, optional
         Voxel intensity value of the hourglass contents.
+    image_shape: 4-tuple, optional
+        Shape of desired resulting image. x, y and z must be equal. Minimum
+        value: (1,3,3,3).
+    pad_edges: bool, optional
+        If True, pads image with 1 voxel wide border. This increases each
+        spatial axes size by 2. Default: False.
+
     """
 
-    def __init__(self, radius=100, glass_value=100, content_value=200):
-        self.y = 2*radius
-        self.x = 2*radius
-        self.z = 2*radius
-        self.time = radius//2
-        self.shape = (self.y, self.x)
+    def __init__(self, radius=100, glass_value=100, content_value=200,
+                 image_shape=None, pad_edges=False):
+        # Check minimum size
+        if (radius < 1):
+            print('Error! Radius too small! Minimum radius = 1.')
+            return
+        # Check proper shape (x, y, z must be equal)
+        if image_shape is not None:
+            if ((image_shape[0] < 1) or (image_shape[-1] < 3)):
+                print('Error! Image size too small! Minimum shape = (1,3,3,3)')
+                return
+            if image_shape[1] == image_shape[2] == image_shape[3]:
+                self.radius = int((image_shape[3] - 1) / 2)
+                self.time_factor = image_shape[0]/self.time
+            else:
+                print('Error! xyz dimensions must be equal.')
+                return
+        else:
+            self.radius = radius
+            self.time_factor = 1
+
+        self.y = 2 * self.radius + 1  # y = 2r + 1
+        self.x = 2 * self.radius + 1  # x = 2r + 1
+        self.z = 2 * self.radius + 1  # z = 2r + 1
+        self.time = self.radius  # time = r
+        self.time *= self.time_factor
+        self.time = round(self.time)
+
+        self.shape_yx = (self.y, self.x)
         self.glass_value = glass_value
         self.content_value = content_value
         self._create_image()
+
+        # Match desired shape spatial dimensions
+        if image_shape is not None:
+            if self.image.shape[-1] < image_shape[-1]:
+                # if desired shape is even, pads image
+                self.image = np.pad(self.image, ((0, 0),
+                                                 (1, 0),
+                                                 (1, 0),
+                                                 (1, 0)))
+
+        # Pad image with 1 pixel wide border
+        if pad_edges:
+            # pad edges for better viewing
+            self.image = np.pad(self.image, ((0, 0),
+                                             (1, 1),
+                                             (1, 1),
+                                             (1, 1)))
 
     def _create_disk(self, radius, fill=False):
         # Create a filled or hollow disk image
@@ -62,70 +110,71 @@ class Hourglass:
             filled_disk_in = np.pad(disk(radius - 1), ((1, 1), (1, 1)))
             return(filled_disk - filled_disk_in)
 
-    def _pad2shape(self, image, shape):
-        #  Pad image with zeros until it has desired shape
-        padding_y = shape[0] - image.shape[0]
-        padding_x = shape[1] - image.shape[1]
+    def _pad2shape(self, image, shape_yx):
+        #  Pad 2D image with zeros until it has desired shape
+        padding_y = shape_yx[0] - image.shape[0]
+        padding_x = shape_yx[1] - image.shape[1]
         if ((padding_y % 2) == 0) & ((padding_x % 2) == 0):
-            padding = ((padding_y//2, padding_y//2), (padding_x//2, padding_x//2))
+            padding = ((padding_y//2, padding_y//2),
+                       (padding_x//2, padding_x//2))
         elif ((padding_y % 2) == 0) & ((padding_x % 2) != 0):
-            padding = ((padding_y//2, padding_y//2), ((padding_x//2) + 1, padding_x//2))
+            padding = ((padding_y//2, padding_y//2),
+                       ((padding_x//2) + 1, padding_x//2))
         elif ((padding_y % 2) != 0) & ((padding_x % 2) == 0):
-            padding = (((padding_y//2) + 1, padding_y//2), (padding_x//2, padding_x//2))
+            padding = (((padding_y//2) + 1, padding_y//2),
+                       (padding_x//2, padding_x//2))
         else:
-            padding = (((padding_y//2) + 1, padding_y//2), ((padding_x//2) + 1, padding_x//2))
+            padding = (((padding_y//2) + 1, padding_y//2),
+                       ((padding_x//2) + 1, padding_x//2))
         return(np.pad(image, padding))
 
     def _create_image(self):
         # Create hourglass image
         self.image = np.zeros((self.time, self.z, self.y, self.x),
                               dtype='uint8')
-        lower_content_radius = 1
         radius_step = 1
         for t in range(self.time):
-            glass_radius = self.y // 2
-            upper_content_radius = self.z // 4
+            glass_radius = self.radius
             for k in range(self.z):
                 # Create hourglass structure
-                if ((k == 1) | (k == self.z - 1)):
+                if ((k == 0) | (k == (self.z - 1))):
                     fill = True  # Bottom and top are filled
                 else:
                     fill = False
-                if k != 0:
-                    #  Draw circular glass wall
-                    disk = self._create_disk(glass_radius, fill)
-                    disk = self._pad2shape(disk, self.shape)
-                    self.image[t, k] =  disk * self.glass_value
-                #  Continuously decrease glass radius while in upper part
-                if k < ((self.z // 2) - 1):
-                    glass_radius -= radius_step
-                elif k == ((self.z // 2) - 1):
-                    glass_radius = 1
-                elif k == (self.z // 2):
-                    glass_radius = radius_step
-                #  Continuously increase glass radius while in lower part
-                else:
-                    glass_radius += radius_step
+                #  Draw circular glass wall
+                disk = self._create_disk(glass_radius, fill)
+                # Match image shape
+                disk = self._pad2shape(disk, self.shape_yx)
+                self.image[t, k] = disk * self.glass_value
+
                 #  Add upper content (from quarter to half image)
                 if ((k >= self.z // 4) & (k < self.z // 2)):
-                    disk = self._create_disk(upper_content_radius, True)
-                    disk = self._pad2shape(disk, self.shape)
-                    self.image[t, k] += disk * self.content_value
-                    upper_content_radius -= radius_step
+                    disk = self._create_disk(glass_radius - 1, True)
+                    disk = self._pad2shape(disk, self.shape_yx)
+                    self.image[t, k] += (disk * self.content_value)
 
-            #  Add lower content: arc droplet
-            if t == 0:
+                #  Continuously decrease glass radius while in upper part
+                if ((k != 0) & (k < (self.z // 2))):
+                    glass_radius -= radius_step
+                #  Continuously increase glass radius while in lower part
+                elif ((k is not (self.z - 2)) & (k >= (self.z // 2))):
+                    glass_radius += radius_step
+
+            #  Add arc droplet
+            if t/self.time_factor < 1:
+                # Add bottleneck point
                 self.image[t,
-                            self.z // 2,
-                            self.y // 2,
-                            self.x // 2] = self.content_value
-            if t >= 1:
-                half_disk = self._create_disk(lower_content_radius, False)
+                           self.z // 2,
+                           self.y // 2,
+                           self.x // 2] = self.content_value
+            else:
+                half_disk = self._create_disk(int(t/self.time_factor), False)
                 half_disk[:, :half_disk.shape[1] // 2] = 0
-                half_disk = self._pad2shape(half_disk, self.shape)
+                half_disk = self._pad2shape(half_disk, self.shape_yx)
                 half_disk *= self.content_value
-                self.image[t, ((self.z // 2) + 2*t)] += half_disk
-                lower_content_radius += 2*radius_step
+                self.image[t,
+                           ((self.z // 2)
+                            + int(t/self.time_factor))] += half_disk
 
 
 def hourglass():
@@ -135,7 +184,7 @@ def hourglass():
 
     Returns
     -------
-    hourglass : (50, 200, 200, 200) uint8 ndarray
+    hourglass : (100, 201, 201, 201) uint8 ndarray
         Hourglass 3D+t (time, z, y, x) image depicting an expanding bright
         half-circle droplet sliding through the glass wall.
     """
