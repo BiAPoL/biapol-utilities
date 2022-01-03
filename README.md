@@ -14,7 +14,7 @@ import biapol_utilities as biau
 
 biau.label.compare_labels(ground_truth, segmented)
 ```
-![img.png](https://github.com/BiAPoL/biapol-utilities/blob/main/docs/_static/example_table.png)
+![img.png](https://github.com/BiAPoL/biapol-utilities/raw/main/docs/_static/example_table.png?raw=true)
 
 In another example, you can visualize a label image with a nice color map like this:
 
@@ -24,7 +24,7 @@ from skimage.io import imshow
 
 imshow(label_image, cmap=biau.labels_colormap(), vmin=0, vmax=labels.max())
 ```
-![img.png](https://github.com/BiAPoL/biapol-utilities/blob/main/docs/_static/example_label_image.png)
+![img.png](https://github.com/BiAPoL/biapol-utilities/raw/main/docs/_static/example_label_image.png?raw=true)
 
 We provide examples to most of our functionality on our [documentation](https://biapol.github.io/biapol-utilities/_include/Examples.html). The examples are also available as [jupyter notebooks](https://github.com/BiAPoL/biapol-utilities/tree/main/docs/_include/notebooks/label).
 
