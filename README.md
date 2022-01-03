@@ -26,8 +26,7 @@ imshow(label_image, cmap=biau.labels_colormap(), vmin=0, vmax=labels.max())
 ```
 ![img.png](docs/_static/example_label_image.png)
 
-More examples are available in our [our example notebooks](https://github.com/BiAPoL/biapol-utilities/tree/main/docs/_include/notebooks/label).
-Also read our [documentation](https://biapol.github.io/biapol-utilities).
+We provide examples to most of our functionality on our [documentation](https://biapol.github.io/biapol-utilities/_include/Examples.html). The examples are also available as [jupyter notebooks](https://github.com/BiAPoL/biapol-utilities/tree/main/docs/_include/notebooks/label).
 
 ## Installation
 
