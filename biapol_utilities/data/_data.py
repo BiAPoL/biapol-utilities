@@ -64,6 +64,7 @@ class Hourglass:
                 return
             if image_shape[1] == image_shape[2] == image_shape[3]:
                 self.radius = int((image_shape[3] - 1) / 2)
+                self.time = self.radius  # time = r
                 self.time_factor = image_shape[0]/self.time
             else:
                 print('Error! xyz dimensions must be equal.')
@@ -177,7 +178,8 @@ class Hourglass:
                             + int(t/self.time_factor))] += half_disk
 
 
-def hourglass():
+def hourglass(radius=100, glass_value=100, content_value=200,
+             image_shape=None, pad_edges=False):
     """Gray-level 3D+t hourglass image.
 
     Can be used for polar transformations, tracking, dimentionality reduction.
@@ -188,7 +190,8 @@ def hourglass():
         Hourglass 3D+t (time, z, y, x) image depicting an expanding bright
         half-circle droplet sliding through the glass wall.
     """
-    return Hourglass().image
+    return Hourglass(radius, glass_value, content_value,
+                 image_shape, pad_edges).image
 
 
 def labels_colormap():
