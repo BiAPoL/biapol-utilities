@@ -52,7 +52,7 @@ class Hourglass:
     """
 
     def __init__(self, radius=100, glass_value=100, content_value=200,
-                 image_shape=None, pad_edges=False):
+                 image_shape=None, pad_edges=False, *args, **kwargs):
         # Check minimum size
         if (radius < 1):
             print('Error! Radius too small! Minimum radius = 1.')
@@ -178,8 +178,7 @@ class Hourglass:
                             + int(t/self.time_factor))] += half_disk
 
 
-def hourglass(radius=100, glass_value=100, content_value=200,
-             image_shape=None, pad_edges=False):
+def hourglass(*args, **kwargs):
     """Gray-level 3D+t hourglass image.
 
     Can be used for polar transformations, tracking, dimentionality reduction.
@@ -190,8 +189,7 @@ def hourglass(radius=100, glass_value=100, content_value=200,
         Hourglass 3D+t (time, z, y, x) image depicting an expanding bright
         half-circle droplet sliding through the glass wall.
     """
-    return Hourglass(radius, glass_value, content_value,
-                 image_shape, pad_edges).image
+    return Hourglass(*args, **kwargs).image
 
 
 def labels_colormap():
