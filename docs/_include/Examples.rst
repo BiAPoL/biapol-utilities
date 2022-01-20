@@ -16,16 +16,15 @@ an object is encoded in the pixel value which must be an integer number.
     Compare segmentations <notebooks/label/Compare_segmentations.ipynb>
     Visualize labels <notebooks/label/visualize_labels.ipynb>
 
-Transform module
+Utilities module
 ------------------
-The transform module contains functions to transform images into other domains
-to ease visualization and quantification of events.
+The utilities module contains functions to support execution of functions.
 
 .. toctree::
     :titlesonly:
     :maxdepth: 0
 
-    Transform to polar coordinates <notebooks/transform/warp_polar_5D_example.ipynb>
+    Apply skimage.warp_polar to nD images <notebooks/utilities/warp_polar_nD_example.ipynb>
 
 Data module
 ------------------

@@ -11,8 +11,6 @@ surface
     Manage surfaces and point representations
 utilities
     Generic utilities.
-transform
-    Transform images
 """
 
 __version__ = "0.0.2"
@@ -21,6 +19,5 @@ __version__ = "0.0.2"
 from . import label
 # from .surface import *
 # from .utilities import *
-# from . import utilities
+from . import utilities
 from . import data
-from . import transform

@@ -31,10 +31,11 @@ The data module provides example data to be usedin the examples section.
     data.blobs
     data.hourglass
 
-The transform module
+The utilities module
 --------------------
-The transform module contains functions to transform images into other domains
-to ease visualization and quantification of events.
+The utilities module contains functions to support execution of
+functions.
+
 
 .. currentmodule:: biapol_utilities
 
@@ -42,4 +43,4 @@ to ease visualization and quantification of events.
     :recursive:
     :toctree: generated
 
-    transform.warp_polar_5D
+    utilities.process_higher_dimension

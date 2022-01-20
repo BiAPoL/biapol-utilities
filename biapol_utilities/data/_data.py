@@ -29,7 +29,6 @@ def blobs():
 class Hourglass:
     """Hourglass 3D+t image generator.
 
-
     Can be used to generate a Gray-level (8-bit) 3D+t image.
 
     Attributes
@@ -182,6 +181,23 @@ def hourglass(*args, **kwargs):
     """Gray-level 3D+t hourglass image.
 
     Can be used for polar transformations, tracking, dimentionality reduction.
+
+    Parameters
+    ----------
+    radius : int, optional
+        Hourglass maximum radius value. Default value: 100. Minimum value: 1.
+        It also defines image shape as (radius, 2*radius + 1, 2*radius + 1,
+                                        2*radius + 1).
+    glass_value: uint8, optional
+        Voxel intensity value of the hourglass walls.
+    content_value: uint8, optional
+        Voxel intensity value of the hourglass contents.
+    image_shape: 4-tuple, optional
+        Shape of desired resulting image. x, y and z must be equal. Minimum
+        value: (1,3,3,3).
+    pad_edges: bool, optional
+        If True, pads image with 1 voxel wide border. This increases each
+        spatial axes size by 2. Default: False.
 
     Returns
     -------
