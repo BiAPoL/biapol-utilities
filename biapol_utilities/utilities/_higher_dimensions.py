@@ -21,14 +21,9 @@ def _get_diff_in_dimensions(func, shape, *args, **kwargs):
 
 def _apply_nD_func_to_nplus1_D_image(image, func, *args, **kwargs):
     """Apply function whose input is a nD image to a (n+1) image using dask."""
-    @dask.delayed
-    def read_first_axis(image, i):
-        image_nminus1_D = image[i]
-        return(image_nminus1_D)
-
     # List of lazy (to be) processed images
     list_of_dask = [
-                    dask.delayed(func)(read_first_axis(image, i),
+                    dask.delayed(func)(image[i],
                                        *args, **kwargs)
                     for i in range(image.shape[0])
     ]
